@@ -102,7 +102,7 @@ public class Coupon  {
 	public boolean ifSoldOut() {
 		boolean result = false ;
 		System.out.println("Coupon amount is " + this.getAmount());
-		if (this.getAmount()<0) {
+		if (this.getAmount()<1) {
 			result = true ; 
 		}
 		return result ; 
