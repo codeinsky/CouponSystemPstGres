@@ -8,14 +8,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 import companiesOBJ.companiesOBJs;
 import couponSystem.beans.Company;
 import couponSystem.beans.Coupon;
-import couponSystem.beans.CouponType;
 import couponSystem.beans.Customer;
 import couponSystem.facade.AdminFacadeF;
+import couponSystem.facade.ClientCouponFacade;
 import couponSystem.facade.CompanyFacadeF;
 import couponSystem.facade.CustomerFacadeF;
+import couponSystem.logIn.LogInService;
+import couponSystem.repos.CompanyRepo;
 import couponSystem.repos.CouponsRepo;
 import couponsOBJ.couponsOBJs;
 import customersOBJ.customersOBJs;
+
 
 
 @RunWith(SpringRunner.class)
@@ -31,8 +34,14 @@ public class CoupomManagmentPstGresSqlApplicationTests {
 	@Autowired 
 	CouponsRepo couponRepo; 
 	
+	@Autowired 
+	CompanyRepo companyRepo; 
+	
 	@Autowired
 	CustomerFacadeF customerFacadeF; 
+	
+	@Autowired
+	LogInService logInService; 
 	
 	@Test
 	public void contextLoads() {
@@ -213,6 +222,16 @@ public class CoupomManagmentPstGresSqlApplicationTests {
 		System.out.println("Coupons per price : "  + customerFacadeF.getMyCouponsSortedByType("PRICE", "200"));
 		System.out.println("Coupons per DATE: "  + customerFacadeF.getMyCouponsSortedByType("DATE", "2025-01-01"));
 		System.out.println("Coupons per DATE: "  + customerFacadeF.getMyCouponsSortedByType("DATE", "2017-01-01"));
+	}
+	
+	@Test 
+	public void testLogIn() {
+		System.out.println(logInService.logIn("admin", "admin", "12345") instanceof ClientCouponFacade);
+		System.out.println(logInService.logIn("admin", "admin", "1234") instanceof ClientCouponFacade);
+		System.out.println(logInService.logIn("company", "IBM", "newOnee") instanceof ClientCouponFacade);
+		System.out.println(logInService.logIn("customer", "Ivan", "bbbbb") instanceof ClientCouponFacade);
+		System.out.println(logInService.logIn("company", "IBM", "newOne") instanceof ClientCouponFacade);
+		System.out.println(logInService.logIn("customer", "Ivan", "bbbb") instanceof ClientCouponFacade);
 	}
 
 

@@ -132,6 +132,7 @@ public class CompanyFacadeF extends ClientCouponFacade {
 		Company myCompany = getMyCompany();
 		if (myCompany.checkCoupon(coupon.getId())) {
 			couponRepo.save(coupon);
+			System.out.println("Coupon updated");
 		}
 		else {
 			System.out.println("Coupon does not belong to your Comapny, can' be updated");

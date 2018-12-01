@@ -2,11 +2,8 @@ package couponSystem.facade;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.HashSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import couponSystem.beans.Company;
 import couponSystem.beans.Coupon;
 import couponSystem.beans.CouponType;
 import couponSystem.beans.Customer;
