@@ -58,7 +58,7 @@ public class CompanyRest {
 	 *
 	 * @param coupon the coupon
 	 */
-	@RequestMapping (value="/company/removeCoupon/{id}" , method = RequestMethod.DELETE , consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping (value="/company/removeCoupon/{id}" , method = RequestMethod.DELETE)
 	public void deleteCoupon (@PathVariable ("id") int id) {
 		company.setCompanyIdLogged(4);
 		company.removeCoupon(id);

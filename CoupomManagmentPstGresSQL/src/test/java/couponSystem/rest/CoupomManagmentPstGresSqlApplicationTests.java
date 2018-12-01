@@ -233,6 +233,11 @@ public class CoupomManagmentPstGresSqlApplicationTests {
 		System.out.println(logInService.logIn("company", "IBM", "newOne") instanceof ClientCouponFacade);
 		System.out.println(logInService.logIn("customer", "Ivan", "bbbb") instanceof ClientCouponFacade);
 	}
+	
+	@Test 
+	public void testGetAllCoupns() {
+		System.out.println("You can buy : "  + customerFacadeF.getAllCouponsToBuy());
+	}
 
 
 

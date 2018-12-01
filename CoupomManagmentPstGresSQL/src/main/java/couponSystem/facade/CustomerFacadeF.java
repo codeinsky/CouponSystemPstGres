@@ -79,8 +79,8 @@ public class CustomerFacadeF extends ClientCouponFacade{
 		boolean amountFlag ;
 		boolean alreadyPurchasedFlag ;
 		Customer mySelf = getMyCustomer();
-		
-		if (couponRepo.existsById(id)) {	
+		System.out.println(id);
+		if (couponRepo.existsById(id)) {
 		// check if coupon was already purchased by the Customer
 			checkedCoupon = couponRepo.findById(id).get();
 			alreadyPurchasedFlag = !mySelf.ifCouponsPurchased(id);
@@ -109,7 +109,7 @@ public class CustomerFacadeF extends ClientCouponFacade{
 		}
 		}
 		else {
-			System.out.println("Coupons with that ID doesn't exist");
+			System.out.println("Coupons with that ID :" + id + " doesn't exist");
 		}
 	}
 	
@@ -186,6 +186,12 @@ public class CustomerFacadeF extends ClientCouponFacade{
 		return couponsSelected; 
 	
 		
+	}
+	
+	public Iterable<Coupon> getAllCouponsToBuy(){
+		Iterable<Coupon> coupons = null; 
+		coupons = couponRepo.findAll();
+		return coupons ; 
 	}
 
 }

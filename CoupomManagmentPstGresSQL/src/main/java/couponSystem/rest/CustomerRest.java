@@ -35,7 +35,7 @@ public class CustomerRest {
 	 *
 	 * @param coupon the coupon
 	 */
-	@RequestMapping(value="/customer/purchaseCoupon/{id}" , method= RequestMethod.POST) 
+	@RequestMapping(value="/customer/purchaseCoupon/{id}" , method= RequestMethod.GET) 
 	public void purchaseCoupon(@PathVariable ("id") int id) {
 		customer.setCustomerLogged(5);
 		customer.purchaseCoupon(id);
@@ -63,6 +63,11 @@ public class CustomerRest {
 	public Collection<Coupon> getCouponsFiltered(@PathVariable ("filter") String filter,@PathVariable  ("reference") String reference) {
 		customer.setCustomerLogged(5);
 		return customer.getMyCouponsSortedByType(filter , reference);
+	}
+	
+	@RequestMapping(value="/customer/getAllCoupons/" , method = RequestMethod.GET ,produces = MediaType.APPLICATION_JSON_VALUE)
+	public Iterable<Coupon> getAllCoupons(){
+		return customer.getAllCouponsToBuy();
 	}
 
 }
