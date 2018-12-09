@@ -67,12 +67,20 @@ public class Coupon  {
 	/**
 	 * Instantiates a new coupon.
 	 */
-	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.DETACH , CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.DETACH , CascadeType.MERGE, CascadeType.REFRESH , CascadeType.REMOVE})
 	@JoinTable(name = "customer_coupon",
 				joinColumns = @JoinColumn(name = "customer_id"),
 				inverseJoinColumns = @JoinColumn(name = "coupon_id"))
 	private Collection<Company> companies;
 	
+	public Collection<Company> getCompanies() {
+		return companies;
+	}
+
+	public void setCompanies(Collection<Company> companies) {
+		this.companies = companies;
+	}
+
 	public Coupon() {
 	}
 
@@ -286,14 +294,16 @@ public class Coupon  {
 		this.type = type;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Coupon [id=" + id + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", amount=" + amount + ", type=" + type + ", message=" + message + ", price=" + price + ", image="
-				+ image + "]";
+				+ image + ", companies=" + companies + "]";
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+
 
 }

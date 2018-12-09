@@ -21,7 +21,8 @@ public class CouponSystemException extends Exception {
 	 * @param string - gets message
 	 */
 	public CouponSystemException(String string) {
-		System.out.println(string);
+		super(string);
+
 	}
 
 	/**

@@ -1,8 +1,11 @@
 package couponSystem.facade;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import couponSystem.beans.Company;
 import couponSystem.beans.Customer;
+import couponSystem.exception.CouponSystemException;
 import couponSystem.repos.CompanyRepo;
 import couponSystem.repos.CouponsRepo;
 import couponSystem.repos.CustomerRepo;
@@ -33,18 +36,20 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 * Method receives Company bean. Checks if already exist company with 
 	 * same name, If not performs createCopmany method. 
 	 * @param company the company
+	 * @throws CouponSystemException 
 	 */
 
-	public void createCompany(Company company) {
-	
+	public Company createCompany(Company company) throws CouponSystemException {
+		Company createdCompany = null;
 		if (companyRepo.existsByCompName(company.getCompName())) {
 			System.out.println("Company with name " + company.getCompName() + " already exists" );
+			throw new CouponSystemException("Company with name " + company.getCompName() + " already exists");
 		}
 		else {
-		companyRepo.save(company);
+		createdCompany = companyRepo.save(company);
 			System.out.println("Company Created");
 		}
-		
+		return createdCompany ; 
 
 	}
 
@@ -59,9 +64,15 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 * @param company the company
 	 */
 	
-	public void removeCompany(Company company) {
-		companyRepo.delete(company);
-		System.out.println("Company removed");
+	public void  removeCompany(Company company) {
+		if (companyRepo.existsById(company.getId())) {
+			companyRepo.delete(company);
+			System.out.println("Company removed");
+		}
+		else {
+			System.out.println("Company does not exist");
+		}
+		
 	}
 
 	/**
@@ -73,15 +84,18 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 * @param company the company
 	 */
 	
-	public void companyDetailsUpdate(Company company) {
+	public Company companyDetailsUpdate(Company company) {
 		// COMPANY NAME CAN NOT BE CHANGED
+		Company updatedCompany = null; 
 		Company comp= companyRepo.findById(company.getId()).get();
 		if(comp.getCompName().equals(company.getCompName())) {
 			companyRepo.save(company);
+			updatedCompany = company; 
 		}
 		else {
 			System.out.println("Company name can not be changed");
 		}
+		return updatedCompany;
 	}
 
 	/**
@@ -101,11 +115,20 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 *
 	 * @param id the id
 	 * @return the company
+	 * @throws CouponSystemException 
 	 */
 
-	public Company getCompany(int id) {
+	public Company getCompany(int id) throws CouponSystemException {
 		Company company = null; 
+		if (companyRepo.existsById(id)) {
 		company = companyRepo.findById(id).get();
+
+		}
+		else {
+			System.out.println("Company with ID: " + id + " does not exist");
+			throw new CouponSystemException("Company with ID: " + id + " does not exist");
+			// place for exception 
+		}
 		return company;
 	}
 
@@ -116,18 +139,22 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 * If no Customer with the name creates new Id for the new customer 
 	 * and adds it to the Data Base in Customer table new row. 
 	 * @param customer the customer
+	 * @throws CouponSystemException 
 	 */
-	public void addCustomer(Customer customer) {
+	public Customer addCustomer(Customer customer) throws CouponSystemException {
+		Customer newCustomer = null; 
 		// need check if there is already customer with same name
 		
 			if (customerRepo.existsByCustName(customer.getCustName())) {
 				System.out.println("Customer with that name already exists");
+				throw new CouponSystemException("Customer with that name already exists");
 			} else {
 				
-				customerRepo.save(customer); // creating new customer
+				newCustomer = customerRepo.save(customer); // creating new customer
+				
 				System.out.println("Customer created");
 			}
-		
+		return newCustomer;
 
 	}
 
@@ -138,10 +165,14 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 * @param customer the customer
 	 */
 
-	public void removeCustomer(Customer customer) {
+	public Customer removeCustomer(Customer customer) {
+		Customer removedCustomer = null;
 		customerRepo.delete(customer);
+		removedCustomer = customer;
 		System.out.println("Customer with name : " +customer.getCustName() +" Removed");
-		// need to remove all other tables 
+		return removedCustomer;
+		// need to remove all other tables
+		
 	}
 
 	/**
@@ -152,16 +183,19 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 * @param customer the customer
 	 */
 	
-	public void updateCustomerDetails(Customer customer) {
+	public Customer updateCustomerDetails(Customer customer) {
+		Customer updatedCustomer = null;
 		Customer cust = null; 
 		cust = customerRepo.findById(customer.getId()).get();
 		if(cust.getCustName().equals(customer.getCustName())) {
 			customerRepo.save(customer);
+			updatedCustomer = customer;
 			System.out.println("Customer Updated");
 		}
 		else {
 			System.out.println("Customer name can not be chnaged");
 		}
+		return updatedCustomer;
 	}
 
 	/**
@@ -181,11 +215,18 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 *
 	 * @param id the id
 	 * @return the customer
+	 * @throws CouponSystemException 
 	 */
 	
-	public Customer getCustomer(int id) {
+	public Customer getCustomer(int id) throws CouponSystemException {
 		Customer customer = null;
+		if (customerRepo.existsById(id)) {
 		customer = customerRepo.findById(id).get();
+		}
+		else {
+			System.out.println("Customer with ID: " + id + " does not exist");
+			throw new CouponSystemException ("Customer with ID: " + id + " does not exist"); 
+		}
 		return customer;
 	}
 }

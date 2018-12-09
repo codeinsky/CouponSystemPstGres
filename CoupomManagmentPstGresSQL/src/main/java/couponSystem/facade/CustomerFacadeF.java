@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import couponSystem.beans.Coupon;
 import couponSystem.beans.CouponType;
 import couponSystem.beans.Customer;
+import couponSystem.exception.CouponSystemException;
 import couponSystem.repos.CompanyRepo;
 import couponSystem.repos.CouponsRepo;
 import couponSystem.repos.CustomerRepo;
@@ -71,9 +72,10 @@ public class CustomerFacadeF extends ClientCouponFacade{
 	 *  	@see dao.HelperMethods#buyCoupon(String, String);
 	 *  	2. Decrees coupons amount in data base 
 	 * @param coupon the coupon
+	 * @throws CouponSystemException 
 	 */
 
-	public void purchaseCoupon(int id) {
+	public void purchaseCoupon(int id) throws CouponSystemException {
 		Coupon checkedCoupon = null;
 		boolean dateFlag ;
 		boolean amountFlag ;
@@ -84,16 +86,33 @@ public class CustomerFacadeF extends ClientCouponFacade{
 		// check if coupon was already purchased by the Customer
 			checkedCoupon = couponRepo.findById(id).get();
 			alreadyPurchasedFlag = !mySelf.ifCouponsPurchased(id);
-			System.out.println("Already purchased flag is : " + alreadyPurchasedFlag);
+			
+			if (!alreadyPurchasedFlag == true ) {
+				System.out.println("Already purchased flag is : " + alreadyPurchasedFlag);
+				throw new CouponSystemException("You already have this coupon") ; 
+				
+			}
+			
 			
 		// check if coupon amount more then > 1 and
 			amountFlag = !checkedCoupon.ifSoldOut();
-			System.out.println("Amount flag is " + amountFlag);
+			if (!amountFlag == true ) {
+				System.out.println("Coupon is soldout");
+				throw new CouponSystemException("Coupon is soldout") ; 
+				
+			}
+			
+			
+			
 			
 		// check if not expired
 			dateFlag = !checkedCoupon.ifExpired();
 			System.out.println("Expiration flag is " + dateFlag);
-			
+			if (!dateFlag == true ) {
+				System.out.println("Coupon is expired ");
+				throw new CouponSystemException("Coupon is expired") ; 
+				
+			}
 		// action - decrees amount and upDate Customer Coupon
 			
 			
@@ -109,7 +128,9 @@ public class CustomerFacadeF extends ClientCouponFacade{
 		}
 		}
 		else {
+			
 			System.out.println("Coupons with that ID :" + id + " doesn't exist");
+			throw new CouponSystemException("Coupons with that ID :" + id + " doesn't exist");
 		}
 	}
 	

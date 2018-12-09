@@ -37,7 +37,7 @@ public class Company {
 	@Column
 	private String email;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL , orphanRemoval = true )
 	@JoinColumn(name="COMPANY_ID")
 	 private Collection<Coupon> coupons ;
 	/**
@@ -103,6 +103,10 @@ public class Company {
 			 }
 		 }
 		return result;
+	 }
+	 
+	 public void clearAllCoupon() {
+		 this.coupons.removeAll(this.coupons);
 	 }
 	 
 	 public void removeCoupon(int id) {

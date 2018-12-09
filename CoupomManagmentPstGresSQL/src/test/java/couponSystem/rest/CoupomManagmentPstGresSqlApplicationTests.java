@@ -9,6 +9,7 @@ import companiesOBJ.companiesOBJs;
 import couponSystem.beans.Company;
 import couponSystem.beans.Coupon;
 import couponSystem.beans.Customer;
+import couponSystem.exception.CouponSystemException;
 import couponSystem.facade.AdminFacadeF;
 import couponSystem.facade.ClientCouponFacade;
 import couponSystem.facade.CompanyFacadeF;
@@ -53,12 +54,12 @@ public class CoupomManagmentPstGresSqlApplicationTests {
 //	}
 	
 	@Test 
-	public void adminCreateCompanyTest1() {
+	public void adminCreateCompanyTest1() throws CouponSystemException {
 		adminFacadeF.createCompany(companiesOBJs.comp1);
 	}
 	
 	@Test 
-	public void adminCreateCompanyTest2() {
+	public void adminCreateCompanyTest2() throws CouponSystemException {
 		adminFacadeF.createCompany(companiesOBJs.comp2);
 	}
 	
@@ -88,22 +89,22 @@ public class CoupomManagmentPstGresSqlApplicationTests {
 	}
 	
 	@Test 
-	public void adminGetComapnyById() {
+	public void adminGetComapnyById() throws CouponSystemException {
 		System.out.println(adminFacadeF.getCompany(26));
 	}
 	
 	@Test 
-	public void adminCreateCustomer() {
+	public void adminCreateCustomer() throws CouponSystemException {
 		adminFacadeF.addCustomer(customersOBJs.customer1);
 	}
 	
 	@Test 
-	public void adminCreateCustomerSameName() {
+	public void adminCreateCustomerSameName() throws CouponSystemException {
 		adminFacadeF.addCustomer(customersOBJs.customer2);
 	}
 	
 	@Test 
-	public void adminCreateCustomerSameName2() {
+	public void adminCreateCustomerSameName2() throws CouponSystemException {
 		adminFacadeF.addCustomer(customersOBJs.customer3);
 	}
 	@Test 
@@ -131,29 +132,29 @@ public class CoupomManagmentPstGresSqlApplicationTests {
 	}
 	
 	@Test 
-	public void adminGetCustomerById() {
+	public void adminGetCustomerById() throws CouponSystemException {
 		System.out.println(adminFacadeF.getCustomer(1));
 	}
 	
 
 	 
 	
-	@Test 
-	public void companyCreateCoupon() {
-		companyFacadeF.setCompanyIdLogged(4);
-		companyFacadeF.createCoupon(couponsOBJs.coupon4);
-		companyFacadeF.createCoupon(couponsOBJs.coupon7);
-		companyFacadeF.createCoupon(couponsOBJs.coupon9);
-		companyFacadeF.createCoupon(couponsOBJs.coupon10);
-		
-	}
+//	@Test 
+//	public void companyCreateCoupon() {
+//		companyFacadeF.setCompanyIdLogged(4);
+//		companyFacadeF.createCoupon(couponsOBJs.coupon4);
+//		companyFacadeF.createCoupon(couponsOBJs.coupon7);
+//		companyFacadeF.createCoupon(couponsOBJs.coupon9);
+//		companyFacadeF.createCoupon(couponsOBJs.coupon10);
+//		
+//	}
 	
-	@Test 
-	public void companyCreateCoupon2() {
-		companyFacadeF.setCompanyIdLogged(26);
-		companyFacadeF.createCoupon(couponsOBJs.coupon2);
-		
-	}
+//	@Test 
+//	public void companyCreateCoupon2() {
+//		companyFacadeF.setCompanyIdLogged(26);
+//		companyFacadeF.createCoupon(couponsOBJs.coupon2);
+//		
+//	}
 	
 	@Test 
 	public void companyCouponUpdate() {
@@ -164,7 +165,7 @@ public class CoupomManagmentPstGresSqlApplicationTests {
 	}
 	
 	@Test 
-	public void companyGetCouponById() {
+	public void companyGetCouponById() throws CouponSystemException {
 		companyFacadeF.setCompanyIdLogged(26);
 		System.out.println("My coupon is " + companyFacadeF.getCouponById(50));
 	}
@@ -176,31 +177,31 @@ public class CoupomManagmentPstGresSqlApplicationTests {
 		System.out.println("All my coupons are :" +   companyFacadeF.getAllCoupons());
 	}
 	@Test 
-	public void testSortCouponsBy() {
+	public void testSortCouponsBy() throws CouponSystemException {
 		companyFacadeF.setCompanyIdLogged(4);
 		System.out.println("My sorted coupons are : " + companyFacadeF.sortCouponBy("TYPE","FOOD"));
 	}
 	
 	@Test 
-	public void testSortCouponsBy1() {
+	public void testSortCouponsBy1() throws CouponSystemException {
 		companyFacadeF.setCompanyIdLogged(4);
 		System.out.println("My sorted coupons are : " + companyFacadeF.sortCouponBy("TYPE","SPORTS"));
 	}
 	
 	@Test 
-	public void testSortCouponsBy3() {
+	public void testSortCouponsBy3() throws CouponSystemException {
 		companyFacadeF.setCompanyIdLogged(4);
 		System.out.println("My sorted coupons by PRICE are : " + companyFacadeF.sortCouponBy("PRICE","5"));
 	}
 	
 	@Test 
-	public void testSortCouponsBy4() {
+	public void testSortCouponsBy4() throws CouponSystemException {
 		companyFacadeF.setCompanyIdLogged(4);
 		System.out.println("My sorted coupons by DATE are : " + companyFacadeF.sortCouponBy("DATE","2025-01-01"));
 	}
 	
 	@Test 
-	public void testBuyACoupon() {
+	public void testBuyACoupon() throws CouponSystemException {
 		customerFacadeF.setCustomerLogged(1);
 		customerFacadeF.purchaseCoupon(60);
 		

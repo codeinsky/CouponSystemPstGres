@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import couponSystem.beans.Company;
 import couponSystem.beans.Coupon;
 import couponSystem.beans.CouponType;
+import couponSystem.exception.CouponSystemException;
 import couponSystem.repos.CompanyRepo;
 import couponSystem.repos.CouponsRepo;
 
@@ -78,7 +79,8 @@ public class CompanyFacadeF extends ClientCouponFacade {
 	 */
 	
 	// Need final check 
-	public void createCoupon(Coupon coupon) {
+	public Coupon createCoupon(Coupon coupon) {
+		Coupon createdCoupon = null; 
 			if (couponRepo.existsByTitle(coupon.getTitle())) {
 				System.out.println("Coupon with " + coupon.getTitle() + " already exists");
 			} 
@@ -90,10 +92,11 @@ public class CompanyFacadeF extends ClientCouponFacade {
 				myComp.setCoupons(coupons);
 				System.out.println("My company is :" + myComp.toString());
 				companyRepo.save(myComp);
+				createdCoupon = coupon;
 				System.out.println("Coupon created");
 			}
 		
-
+			return createdCoupon;
 	}
 
 	/**
@@ -103,12 +106,11 @@ public class CompanyFacadeF extends ClientCouponFacade {
 	 * @param coupon the coupon
 	 */
 
-	public void removeCoupon(int id) {
+	public int removeCoupon(int id) {
 		Company myCompany = getMyCompany();
 		if (myCompany.checkCoupon(id)) {
 			myCompany.removeCoupon(id);
 			companyRepo.save(myCompany);
-			couponRepo.deleteById(id);
 			System.out.println("Coupon was removed");
 			System.out.println("My coupons after delete : " + myCompany.getCoupons());
 		}
@@ -116,7 +118,7 @@ public class CompanyFacadeF extends ClientCouponFacade {
 		else {
 			System.out.println("Coupon does not belong to your company");
 		}
-		
+		return id;
 	}
 
 	/**
@@ -128,15 +130,17 @@ public class CompanyFacadeF extends ClientCouponFacade {
 	 * @param coupon the coupon
 	 */
 	
-	public void updateCoupon(Coupon coupon) {
+	public Coupon updateCoupon(Coupon coupon) {
+		Coupon updatedCoupon = null; 
 		Company myCompany = getMyCompany();
 		if (myCompany.checkCoupon(coupon.getId())) {
-			couponRepo.save(coupon);
+			updatedCoupon = couponRepo.save(coupon);
 			System.out.println("Coupon updated");
 		}
 		else {
 			System.out.println("Coupon does not belong to your Comapny, can' be updated");
 		}
+		return updatedCoupon;
 	}
 
 	/**
@@ -145,10 +149,11 @@ public class CompanyFacadeF extends ClientCouponFacade {
 	 * returns Company bean by ID.  
 	 * @param id the id
 	 * @return the coupon by id
+	 * @throws CouponSystemException 
 	 * 
 	 */
 
-	public Coupon getCouponById(int id) {
+	public Coupon getCouponById(int id) throws CouponSystemException {
 		Company myCompany = getMyCompany();
 		Coupon coupon = null ;
 		if (myCompany.checkCoupon(id)) {
@@ -156,6 +161,7 @@ public class CompanyFacadeF extends ClientCouponFacade {
 		}
 		else {
 			System.out.println("Coupon with Id :" +id + " doesn't belong to your company");
+			throw new CouponSystemException ("Coupon with Id :" +id + " doesn't belong to your company"); 
 		}
 		return coupon ; 
 
@@ -182,11 +188,12 @@ public class CompanyFacadeF extends ClientCouponFacade {
 	 * @param select the select
 	 * @param refernece the reference
 	 * @return the collection
+	 * @throws CouponSystemException 
 	 */
 	// 'yyyy-mm-dd'
 	
 	// need to be done 
-	public Collection<Coupon> sortCouponBy(String select, String refernece) {
+	public Collection<Coupon> sortCouponBy(String select, String refernece) throws CouponSystemException {
 		Collection<Coupon> coupons = null ; 
 		Collection<Coupon> couponsSelected = new HashSet<Coupon>();
 		Company company = getMyCompany(); 
@@ -199,7 +206,11 @@ public class CompanyFacadeF extends ClientCouponFacade {
 				couponsSelected.add(coupon);
 			}
 		}
-		break ; 
+		if (couponsSelected.isEmpty()) {
+			throw new CouponSystemException ("Your Company does not have coupons of TYPE: " + refernece);
+		}
+		break ;
+		
 		case "PRICE" :
 			for (Coupon coupon : coupons) {
 				if (coupon.getPrice()< Long.valueOf(refernece)) {

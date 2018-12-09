@@ -1,14 +1,19 @@
 package couponSystem.rest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import couponSystem.beans.Company;
+import couponSystem.beans.Coupon;
 import couponSystem.beans.Customer;
+import couponSystem.exception.CouponSystemException;
 import couponSystem.facade.AdminFacadeF;
 
 
@@ -49,9 +54,17 @@ public class AdminRest {
 	 *
 	 * @param company the company
 	 */
-	@RequestMapping (value="/admin/createCompany" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void createCompany(@RequestBody Company company) {
-		admin.createCompany(company);
+	@RequestMapping (value="/admin/createCompany" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity createCompany(@RequestBody Company company) {
+		
+		try {
+			admin.createCompany(company);
+			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body("Company : " + company.getCompName() + " created");
+		} catch (CouponSystemException e) {
+			// TODO Auto-generated catch bloc
+			return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
+		}
+		
 	}
 	
 	/**
@@ -69,9 +82,10 @@ public class AdminRest {
 	 *
 	 * @param company the company
 	 */
-	@RequestMapping (value="/admin/removeCompany" , method = RequestMethod.DELETE)
+	@RequestMapping (value="/admin/removeCompany" , method = RequestMethod.DELETE , produces = MediaType.APPLICATION_JSON_VALUE)
 	public void removeCompany (@RequestBody Company company) {
 		admin.removeCompany(company);
+	 
 		
 	}
 	
@@ -81,8 +95,9 @@ public class AdminRest {
 	 * @param company the company
 	 */
 	@RequestMapping(value = "/admin/companyDetailsUpdate" , method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateCompany(@RequestBody Company company) {
-		admin.companyDetailsUpdate(company);
+	public Company updateCompany(@RequestBody Company company) {
+		Company updatedCopmany = admin.companyDetailsUpdate(company);
+		return updatedCopmany ; 
 	}
 	
 	/**
@@ -92,8 +107,14 @@ public class AdminRest {
 	 * @return the company by id
 	 */
 	@RequestMapping(value="/admin/getCompany/{id}" , method = RequestMethod.GET)
-	public Company getCompanyById (@PathVariable("id") int id) {
-		return admin.getCompany(id);
+	public @ResponseBody ResponseEntity  getCompanyById (@PathVariable("id") int id) {
+		try {
+			Company company  =  admin.getCompany(id);
+			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(company);
+		} catch (CouponSystemException e) {
+			// TODO Auto-generated catch block
+			return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
+		}
 		
 		
 		//Customer REST 
@@ -105,8 +126,15 @@ public class AdminRest {
 	 * @param customer the customer
 	 */
 	@RequestMapping(value="/admin/addCustomer" , method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void createCustomer(@RequestBody Customer customer) {
-		admin.addCustomer(customer);
+	public @ResponseBody ResponseEntity  createCustomer(@RequestBody Customer customer) {
+		try {
+			Customer newCustomer = admin.addCustomer(customer);
+			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body("Customer " +newCustomer.getCustName()+ " created");
+		} catch (CouponSystemException e) {
+			// TODO Auto-generated catch block
+			return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
+		}
+	
 	}
 	
 	/**
@@ -116,8 +144,14 @@ public class AdminRest {
 	 * @return the customer by id
 	 */
 	@RequestMapping(value="/admin/getCustomer/{id}" , method = RequestMethod.GET)
-	public Customer getCustomerById(@PathVariable("id") int id) {
-		return admin.getCustomer(id);
+	public @ResponseBody ResponseEntity getCustomerById(@PathVariable("id") int id) {
+		try {
+		 Customer customer =  admin.getCustomer(id);
+		  return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(customer);
+		} catch (CouponSystemException e) {
+			// TODO Auto-generated catch block
+		  return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
+		}
 	}
 	
 	/**
@@ -127,8 +161,9 @@ public class AdminRest {
 	 * Removes just by ID 
 	 */
 	@RequestMapping(value="/admin/removeCustomer" ,  method = RequestMethod.DELETE , consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void removeCustomer(@RequestBody Customer customer) {
-		admin.removeCustomer(customer);
+	public Customer removeCustomer(@RequestBody Customer customer) {
+		Customer removedCustomer = admin.removeCustomer(customer);
+		return removedCustomer;
 	}
 	
 	/**
@@ -137,8 +172,9 @@ public class AdminRest {
 	 * @param customer the customer
 	 */
 	@RequestMapping (value="/admin/updateCustomerDetails" , method = RequestMethod.PUT )
-	public void updateCustomer (@RequestBody Customer customer) {
-		admin.updateCustomerDetails(customer);
+	public Customer updateCustomer (@RequestBody Customer customer) {
+		Customer updatedCustomer = admin.updateCustomerDetails(customer);
+		return updatedCustomer; 
 	}
 	
 	/**
