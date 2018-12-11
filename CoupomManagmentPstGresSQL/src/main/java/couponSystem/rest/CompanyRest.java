@@ -66,8 +66,8 @@ public class CompanyRest {
 	 */
 	@RequestMapping (value="/company/removeCoupon/{id}" , method = RequestMethod.DELETE)
 	public int deleteCoupon (@PathVariable ("id") int id , HttpServletRequest request) {
-		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
-		myFacade.setCompanyIdLogged(2);
+		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		//myFacade.setCompanyIdLogged(2);
 		int removedId = myFacade.removeCoupon(id);
 		return removedId; 
 	}
@@ -110,8 +110,8 @@ public class CompanyRest {
 	 */
 	@RequestMapping (value="/company/getAllCoupons" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
 	public Collection<Coupon> getAllCoupons(HttpServletRequest request){
-		myFacade.setCompanyIdLogged(2);
-		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		 //myFacade.setCompanyIdLogged(2);
+		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
 		return myFacade.getAllCoupons();
 	}
 	
