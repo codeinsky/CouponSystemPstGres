@@ -42,8 +42,8 @@ public class CompanyRest {
 	// CompanyFacadeF company = new CompanyFacadeF(8); 
 	
 	
-	@Autowired 
-	public CompanyFacadeF myFacade;
+//	@Autowired 
+//	public CompanyFacadeF myFacade;
 	
 
 	/**
@@ -54,7 +54,7 @@ public class CompanyRest {
 	@RequestMapping (value="/company/createCoupon" , method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Coupon createCoupon(@RequestBody Coupon coupon , HttpServletRequest request) {
 		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
-		//myFacade.setCompanyIdLogged(2);
+		// myFacade.setCompanyIdLogged(2);
 		Coupon createdCoupon = myFacade.createCoupon(coupon);
 		return createdCoupon; 
 	}
@@ -93,8 +93,8 @@ public class CompanyRest {
 	 */
 	@RequestMapping (value = "/company/getCouponById/{id}" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity getCouponByID (@PathVariable ("id") int id , HttpServletRequest request) {
-		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
-		myFacade.setCompanyIdLogged(2);
+		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		// myFacade.setCompanyIdLogged(2);
 		try {
 			Coupon coupon =  myFacade.getCouponById(id);
 			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(coupon);
@@ -110,8 +110,8 @@ public class CompanyRest {
 	 */
 	@RequestMapping (value="/company/getAllCoupons" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
 	public Collection<Coupon> getAllCoupons(HttpServletRequest request){
-		// myFacade.setCompanyIdLogged(2);
-		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		//myFacade.setCompanyIdLogged(2);
+		 CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
 		return myFacade.getAllCoupons();
 	}
 	
