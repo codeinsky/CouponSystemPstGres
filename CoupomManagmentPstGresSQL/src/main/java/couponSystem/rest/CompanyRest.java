@@ -54,7 +54,7 @@ public class CompanyRest {
 	@RequestMapping (value="/company/createCoupon" , method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Coupon createCoupon(@RequestBody Coupon coupon , HttpServletRequest request) {
 		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
-		myFacade.setCompanyIdLogged(202);
+		myFacade.setCompanyIdLogged(4);
 		Coupon createdCoupon = myFacade.createCoupon(coupon);
 		return createdCoupon; 
 	}
@@ -67,7 +67,7 @@ public class CompanyRest {
 	@RequestMapping (value="/company/removeCoupon/{id}" , method = RequestMethod.DELETE)
 	public int deleteCoupon (@PathVariable ("id") int id , HttpServletRequest request) {
 	//	CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
-		myFacade.setCompanyIdLogged(202);
+		myFacade.setCompanyIdLogged(4);
 		int removedId = myFacade.removeCoupon(id);
 		return removedId; 
 	}
@@ -80,7 +80,7 @@ public class CompanyRest {
 	@RequestMapping (value = "/company/updateCoupon" , method = RequestMethod.PUT , consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Coupon updateCoupon(@RequestBody Coupon coupon , HttpServletRequest request) {
 	//	CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
-		myFacade.setCompanyIdLogged(202);
+		myFacade.setCompanyIdLogged(4);
 		Coupon updatedCoupon = myFacade.updateCoupon(coupon);
 		return updatedCoupon;
 	}
@@ -94,7 +94,7 @@ public class CompanyRest {
 	@RequestMapping (value = "/company/getCouponById/{id}" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity getCouponByID (@PathVariable ("id") int id , HttpServletRequest request) {
 		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
-		myFacade.setCompanyIdLogged(202);
+		myFacade.setCompanyIdLogged(4);
 		try {
 			Coupon coupon =  myFacade.getCouponById(id);
 			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(coupon);
@@ -112,7 +112,7 @@ public class CompanyRest {
 	public Collection<Coupon> getAllCoupons(HttpServletRequest request){
 	//	company.setCompanyIdLogged(4);
 	//	CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
-		myFacade.setCompanyIdLogged(202);
+		myFacade.setCompanyIdLogged(4);
 		return myFacade.getAllCoupons();
 	}
 	
@@ -126,7 +126,7 @@ public class CompanyRest {
 	@RequestMapping (value="/company/sortCouponBy/{filter}/{reference}" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity getFiltertedCoupons(@PathVariable ("filter" ) String filter  , 
 			@PathVariable ("reference" ) String reference , HttpServletRequest request) {
-		myFacade.setCompanyIdLogged(202);
+		myFacade.setCompanyIdLogged(4);
 		// CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
 		try {
 			Collection<Coupon> coupons =  myFacade.sortCouponBy(filter, reference);

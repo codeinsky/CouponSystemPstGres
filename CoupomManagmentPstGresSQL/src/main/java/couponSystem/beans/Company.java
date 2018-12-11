@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Company.
@@ -37,8 +39,9 @@ public class Company {
 	@Column
 	private String email;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL , orphanRemoval = true )
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="COMPANY_ID")
+	@JsonIgnore 
 	 private Collection<Coupon> coupons ;
 	/**
 	 * Instantiates a new company.

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 // TODO: Auto-generated Javadoc
 
 /**
@@ -36,10 +38,11 @@ public class Customer {
 	private String password;
 
 	/** The coupon. */
-	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.DETACH , CascadeType.MERGE, CascadeType.REFRESH , CascadeType.REMOVE})
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH , CascadeType.MERGE , CascadeType.REFRESH})
 	@JoinTable(name = "customer_coupon",
 						joinColumns = @JoinColumn(name = "customer_id"),
 						inverseJoinColumns = @JoinColumn(name = "coupon_id"))
+	@JsonIgnore 
 	private Collection<Coupon> coupons;
 
 	public Collection<Coupon> getCoupons() {

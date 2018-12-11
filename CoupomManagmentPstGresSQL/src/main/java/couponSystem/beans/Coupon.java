@@ -67,18 +67,20 @@ public class Coupon  {
 	/**
 	 * Instantiates a new coupon.
 	 */
-	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.DETACH , CascadeType.MERGE, CascadeType.REFRESH , CascadeType.REMOVE})
+	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.DETACH , CascadeType.REFRESH})
 	@JoinTable(name = "customer_coupon",
 				joinColumns = @JoinColumn(name = "customer_id"),
 				inverseJoinColumns = @JoinColumn(name = "coupon_id"))
-	private Collection<Company> companies;
+	private Collection<Customer> customers;
 	
-	public Collection<Company> getCompanies() {
-		return companies;
+
+
+	public Collection<Customer> getCustomers() {
+		return customers;
 	}
 
-	public void setCompanies(Collection<Company> companies) {
-		this.companies = companies;
+	public void setCustomers(Collection<Customer> customers) {
+		this.customers = customers;
 	}
 
 	public Coupon() {
@@ -126,8 +128,10 @@ public class Coupon  {
 		return result; 
 	}
 
+	
+
 	public Coupon(int id, String title, Date startDate, Date endDate, int amount, CouponType type, String message,
-			Double price, String image, Collection<Company> companies) {
+			Double price, String image, Collection<Customer> customers) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -138,7 +142,7 @@ public class Coupon  {
 		this.message = message;
 		this.price = price;
 		this.image = image;
-		this.companies = companies;
+		this.customers = customers;
 	}
 
 	/**
@@ -298,8 +302,10 @@ public class Coupon  {
 	public String toString() {
 		return "Coupon [id=" + id + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", amount=" + amount + ", type=" + type + ", message=" + message + ", price=" + price + ", image="
-				+ image + ", companies=" + companies + "]";
+				+ image + ", customers=" + customers + "]";
 	}
+
+	
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

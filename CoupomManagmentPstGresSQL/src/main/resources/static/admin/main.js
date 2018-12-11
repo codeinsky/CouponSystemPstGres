@@ -261,6 +261,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _common_customer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/customer */ "./src/app/common/customer.ts");
 /* harmony import */ var _services_admin_requests_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/admin-requests.service */ "./src/app/services/admin-requests.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -273,6 +275,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AddcustomerComponent = /** @class */ (function () {
     function AddcustomerComponent(_adminService) {
         this._adminService = _adminService;
@@ -281,7 +284,11 @@ var AddcustomerComponent = /** @class */ (function () {
     AddcustomerComponent.prototype.ngOnInit = function () {
     };
     AddcustomerComponent.prototype.addNewCustomer = function () {
-        this._adminService.createCustomer(this.addCustomer);
+        this._adminService.createCustomer(this.addCustomer).subscribe(function (resp) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()("New customer added");
+        }, function (error) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()(error._body);
+        });
     };
     AddcustomerComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -333,6 +340,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _common_company__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/company */ "./src/app/common/company.ts");
 /* harmony import */ var _services_admin_requests_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/admin-requests.service */ "./src/app/services/admin-requests.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -345,6 +354,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var CraeteCompanyComponent = /** @class */ (function () {
     function CraeteCompanyComponent(_adminservice) {
         this._adminservice = _adminservice;
@@ -354,8 +364,11 @@ var CraeteCompanyComponent = /** @class */ (function () {
     CraeteCompanyComponent.prototype.ngOnInit = function () {
     };
     CraeteCompanyComponent.prototype.createCompany = function () {
-        console.log("create test");
-        this._adminservice.createNewCopmany(this.addCompany);
+        this._adminservice.createNewCopmany(this.addCompany).subscribe(function (resp) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()("Company created");
+        }, function (error) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()(error._body);
+        });
     };
     CraeteCompanyComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -534,7 +547,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h4>Remove/Update copmany</h4>\n<div class=\"panel panel-primary\" style=\"height:110px;width: 20%; margin:1%\">\n\t<div class=\"panel-heading\">\n\t\t<label class=\"radio-inline\"><input type=\"radio\" name=\"optradio\" checked>Search by ID</label>\n\t\t<label class=\"radio-inline\"><input type=\"radio\" name=\"optradio\">Search by Name</label>\n\t\t<input type=\"text\" name=\"\" class=\"form-control\" [(ngModel)]=\"byId\" placeholder=\"Company Name or ID number\">\n\t\t</div>\n\t\t<button (click)=\"getComapny()\" class=\"btn btn-primary btn-block\">Find Company</button>\n\t\n</div>\n\t\n<div class=\"panel panel-primary\" style=\"height:440px;width: 20%; margin: 1%\">\n\t<div class=\"panel-heading\"><h5>COMAPNY</h5></div> \n\t<br>\n\t\t<form  style=\"margin-left: 10px; margin-right: 10px\">\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t<label for=\"\">Company ID</label>\n\t\t\t\t\t<input type=\"number\" class=\"form-control\" [(ngModel)]=\"companyUpdate.id\" name=\"id\"> \n\t\t\t\n\t<br>\n\t\t\t\n\t\t\t\t<label for=\"\">Company Name</label>\n\t\t\t\t<input type=\"text\" name=\"\" class=\"form-control\" [(ngModel)]=\"companyUpdate.compName\" name=\"compName\">\n\t\t\n\t<br>\n\n\t\t\t\n\t\t\t\t<label for=\"\">Password</label>\n\t\t\t\t<input type=\"passwod\" name=\"\" class=\"form-control\" [(ngModel)]=\"companyUpdate.password\" name=\"Password\">\n\t\t\t\n\t<br>\n\t\t\t\n\t\t\t\t<label for=\"\">Email</label> \n\t\t\t\t<input type=\"text\" name=\"\" class=\"form-control\" [(ngModel)]=\"companyUpdate.email\" name=\"email\"> \n\t\t\t\n\t<br>\n\n\t<button (click)=\"removeCompany()\" class=\"btn btn-primary\">Remove Company</button>&nbsp;&nbsp;&nbsp;\n\t<button (click)=\"updateCompany()\" class=\"btn btn-primary\">Update Comapny</button>\n\n</form>\n</div>"
+module.exports = "<h4>Remove/Update copmany</h4>\n<div class=\"panel panel-primary\" style=\"height:110px;width: 20%; margin:1%\">\n\t<div class=\"panel-heading\">\n\t\t<label class=\"radio-inline\"><input type=\"radio\" name=\"optradio\" checked>Search by ID</label>\n\t\t<label class=\"radio-inline\"><input type=\"radio\" name=\"optradio\">Search by Name</label>\n\t\t<input type=\"text\" name=\"\" class=\"form-control\" [(ngModel)]=\"byId\" placeholder=\"Company Name or ID number\">\n\t\t</div>\n\t\t<button (click)=\"getCompany()\" class=\"btn btn-primary btn-block\">Find Company</button>\n</div>\n\t\n<div class=\"panel panel-primary\" style=\"height:440px;width: 20%; margin: 1%\">\n\t<div class=\"panel-heading\"><h5>COMAPNY</h5></div> \n\t<br>\n\t\t<form  style=\"margin-left: 10px; margin-right: 10px\">\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t<label for=\"\">Company ID</label>\n\t\t\t\t\t<input type=\"number\" class=\"form-control\" [(ngModel)]=\"companyUpdate.id\" name=\"id\"> \n\t\t\t\n\t<br>\n\t\t\t\n\t\t\t\t<label for=\"\">Company Name</label>\n\t\t\t\t<input type=\"text\" name=\"\" class=\"form-control\" [(ngModel)]=\"companyUpdate.compName\" name=\"compName\">\n\t\t\n\t<br>\n\n\t\t\t\n\t\t\t\t<label for=\"\">Password</label>\n\t\t\t\t<input type=\"passwod\" name=\"\" class=\"form-control\" [(ngModel)]=\"companyUpdate.password\" name=\"Password\">\n\t\t\t\n\t<br>\n\t\t\t\n\t\t\t\t<label for=\"\">Email</label> \n\t\t\t\t<input type=\"text\" name=\"\" class=\"form-control\" [(ngModel)]=\"companyUpdate.email\" name=\"email\"> \n\t\t\t\n\t<br>\n\n\t<button (click)=\"removeCompany()\" class=\"btn btn-primary\">Remove Company</button>&nbsp;&nbsp;&nbsp;\n\t<button (click)=\"updateCompany()\" class=\"btn btn-primary\">Update Comapny</button>\n\n</form>\n</div>"
 
 /***/ }),
 
@@ -551,6 +564,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _common_company__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/company */ "./src/app/common/company.ts");
 /* harmony import */ var _services_admin_requests_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/admin-requests.service */ "./src/app/services/admin-requests.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -563,6 +578,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var RemoveCompanyComponent = /** @class */ (function () {
     function RemoveCompanyComponent(_adminService) {
         this._adminService = _adminService;
@@ -570,11 +586,13 @@ var RemoveCompanyComponent = /** @class */ (function () {
     }
     RemoveCompanyComponent.prototype.ngOnInit = function () {
     };
-    RemoveCompanyComponent.prototype.getComapny = function () {
+    RemoveCompanyComponent.prototype.getCompany = function () {
         var _this = this;
         this._adminService.searchCompanyById(this.byId).subscribe(function (resp) {
             _this.companyUpdate = resp.json();
             console.log(_this.companyUpdate);
+        }, function (error) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()(error._body);
         });
     };
     RemoveCompanyComponent.prototype.removeCompany = function () {
@@ -633,6 +651,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _common_customer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/customer */ "./src/app/common/customer.ts");
 /* harmony import */ var _services_admin_requests_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/admin-requests.service */ "./src/app/services/admin-requests.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -642,6 +662,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -656,6 +677,8 @@ var RemoveupdatecustomerComponent = /** @class */ (function () {
         var _this = this;
         this._adminService.searchCustomerById(this.customerId).subscribe(function (resp) {
             _this.updateCustomer = resp.json();
+        }, function (error) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()(error._body);
         });
     };
     RemoveupdatecustomerComponent.prototype.updateTheCustomer = function () {
@@ -691,6 +714,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminRequestsService", function() { return AdminRequestsService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -700,6 +725,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -714,12 +740,9 @@ var AdminRequestsService = /** @class */ (function () {
         });
     };
     AdminRequestsService.prototype.createNewCopmany = function (company) {
-        console.log("creating new company");
-        this.http.post("http://localhost:8082/admin/createCompany", company).subscribe(function (resp) {
-        });
+        return this.http.post("http://localhost:8082/admin/createCompany", company);
     };
     AdminRequestsService.prototype.searchCompanyById = function (id) {
-        console.log("Test");
         return this.http.get("http://localhost:8082/admin/getCompany/" + id);
     };
     // need to create for in Server Side 
@@ -732,12 +755,16 @@ var AdminRequestsService = /** @class */ (function () {
             body: company,
         });
         this.http.delete("http://localhost:8082/admin/removeCompany", options).subscribe(function (resp) {
-            console.log(resp);
+            if (resp.status == 200) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Company was removed');
+            }
         });
     };
     AdminRequestsService.prototype.updateCompany = function (company) {
+        var _this = this;
         this.http.put("http://localhost:8082/admin/companyDetailsUpdate", company).subscribe(function (resp) {
-            console.log(resp.status);
+            _this.company = resp.json();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Company ' + _this.company.compName + ' was Updated');
         });
     };
     // Customer Services 
@@ -748,24 +775,31 @@ var AdminRequestsService = /** @class */ (function () {
         });
     };
     AdminRequestsService.prototype.createCustomer = function (customer) {
-        this.http.post("http://localhost:8082/admin/addCustomer", customer).subscribe(function (resp) {
-            console.log(resp);
-        });
+        return this.http.post("http://localhost:8082/admin/addCustomer", customer);
+        // this.http.post("http://localhost:8082/admin/addCustomer" , customer).subscribe(
+        //   (resp)=>{
+        //     this.customer = resp.json(); 
+        //    swal ('Customer created with ID : ' + this.customer.id );
+        //   })
     };
     AdminRequestsService.prototype.searchCustomerById = function (id) {
         return this.http.get("http://localhost:8082/admin/getCustomer/" + id);
     };
     AdminRequestsService.prototype.updateCustomer = function (customer) {
+        var _this = this;
         this.http.put("http://localhost:8082/admin/updateCustomerDetails", customer).subscribe(function (resp) {
-            console.log(resp);
+            _this.customer = resp.json();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Customer ' + _this.customer.custName + ' updated');
         });
     };
     AdminRequestsService.prototype.removeCustomer = function (customer) {
+        var _this = this;
         var options = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestOptions"]({
             body: customer
         });
         this.http.delete("http://localhost:8082/admin/removeCustomer", options).subscribe(function (resp) {
-            console.log(resp.status);
+            _this.customer = resp.json();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Customer ' + _this.customer.custName + ' removed');
         });
     };
     AdminRequestsService = __decorate([

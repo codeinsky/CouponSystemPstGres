@@ -46,7 +46,9 @@
 		</dependency>
 	</dependencies>
 
+
 	<build>
+		<finalName>couponsystemv1</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

@@ -186,7 +186,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-primary\" style=\"margin: 1%;width: 20%;\">\n\t<div class=\"panel-heading\"><h5>Buy a coupon</h5></div>\n\t<div>\n\t\t<form action=\"\" class=\"from\">\n\t\t\t<label for=\"couponId\">Please enter Coupon ID</label>\n\t\t\t<input name=\"couponId\" type=\"number\" class=\"form-control\" [(ngModel)]=\"id\" style=\"width: 50%;\"> \n\t\t\t<button (click)=\"buyCoupon()\">Buy</button>\n\t\t</form>\n\t</div>\n</div>\n<div class=\"panel panel-primary\" style=\"margin: 5%\">\n\t<div class=\"panel-heading\">\n\t\t{{filter}}\n\t\t<h5 style=\"font-weight: bold \">All Coupons</h5>\n\t\t<span>Sort Coupons by Type : </span>\n\t\t<select name=\"filter\" id=\"filter\" (change)=\"onChangeGet()\" class=\"form-control inputstl\"\n\t\tstyle=\"width: 10%\" [(ngModel)]=\"filter\" > \n\t\t\t<option value=\"All Coupons\">All Coupons</option>\n\t\t\t<option value=\"RESTAURANTS\">RESTAURANTS</option>\n\t\t\t<option value=\"ELECTRICITY\">ELECTRICITY</option>\n\t\t\t<option value=\"FOOD\">FOOD</option>\n\t\t\t<option value=\"HEALTH\">HEALTH</option>\n\t\t\t<option value=\"SPORTS\">SPORTS</option>\n\t\t\t<option value=\"CAMPING\">CAMPING</option>\n\t\t\t<option value=\"TRAVELLING\">TRAVELLING</option>\n\n\t\t</select>\n\t</div>\n\t<table class=\"table table-striped table-bordered\">\n\t\t<tr>\n\t\t\t<th>Id</th>\n\t\t\t<th>Title</th>\n\t\t\t<th>Start Date</th>\n\t\t\t<th>End Date</th>\n\t\t\t<th>Amount</th>\n\t\t\t<th>Coupon Type</th>\n\t\t\t<th>Message</th>\n\t\t\t<th>Price</th>\n\t\t\t<th>Image</th>\n\t\t</tr>\n\t\t<tr *ngFor=\"let coupon of _couponList\">\n\t\t\t<td>{{coupon.id}}</td>\n\t\t\t<td>{{coupon.title}}</td>\n\t\t\t<td>{{coupon.startDate}}</td>\n\t\t\t<td>{{coupon.endDate}}</td>\n\t\t\t<td>{{coupon.amount}}</td>\n\t\t\t<td>{{coupon.type}}</td>\n\t\t\t<td>{{coupon.message}}</td>\n\t\t\t<td>{{coupon.price}}</td>\n\t\t\t<td>{{coupon.image}}</td>\n\t\t</tr>\n\t\t<button (click)=\"getCoupons()\">UpDate</button>\n\t</table>\n</div>\n"
+module.exports = "<div class=\"panel panel-primary\" style=\"margin: 1%;width: 20%;\">\n\t<div class=\"panel-heading\"><h5>Buy a coupon</h5></div>\n\t<div>\n\t\t<form action=\"\" class=\"from\">\n\t\t\t<label for=\"couponId\">Please enter Coupon ID</label>\n\t\t\t<input name=\"couponId\" type=\"number\" class=\"form-control\" [(ngModel)]=\"id\" style=\"width: 50%;\"> \n\t\t\t<button (click)=\"buyCoupon()\">Buy</button>\n\t\t</form>\n\t</div>\n</div>\n<div class=\"panel panel-primary\" style=\"margin: 5%\">\n\t<div class=\"panel-heading\">\n\t\t<h5 style=\"font-weight: bold \">All Coupons</h5>\n\t\t<span>Sort Coupons by Type : </span>\n\t\t<select name=\"filter\" id=\"filter\" (change)=\"getCoupons()\" class=\"form-control inputstl\"\n\t\tstyle=\"width: 10%\" [(ngModel)]=\"filter\" > \n\t\t\t<option selected value=\"All\" >All Coupons</option>\n\t\t\t<option value=\"RESTAURANTS\">RESTAURANTS</option>\n\t\t\t<option value=\"ELECTRICITY\">ELECTRICITY</option>\n\t\t\t<option value=\"FOOD\">FOOD</option>\n\t\t\t<option value=\"HEALTH\">HEALTH</option>\n\t\t\t<option value=\"SPORTS\">SPORTS</option>\n\t\t\t<option value=\"CAMPING\">CAMPING</option>\n\t\t\t<option value=\"TRAVELLING\">TRAVELLING</option>\n\n\t\t</select>\n\t</div>\n\n\n\t<table class=\"table table-striped table-bordered\">\n\t\t<tr>\n\t\t\t<th>Id</th>\n\t\t\t<th>Title</th>\n\t\t\t<th>Start Date</th>\n\t\t\t<th>End Date</th>\n\t\t\t<th>Amount</th>\n\t\t\t<th>Coupon Type</th>\n\t\t\t<th>Message</th>\n\t\t\t<th>Price</th>\n\t\t\t<th>Image</th>\n\t\t</tr>\n\t\t<tr *ngFor=\"let coupon of _couponList\">\n\t\t\t<td>{{coupon.id}}</td>\n\t\t\t<td>{{coupon.title}}</td>\n\t\t\t<td>{{coupon.startDate}}</td>\n\t\t\t<td>{{coupon.endDate}}</td>\n\t\t\t<td>{{coupon.amount}}</td>\n\t\t\t<td>{{coupon.type}}</td>\n\t\t\t<td>{{coupon.message}}</td>\n\t\t\t<td>{{coupon.price}}</td>\n\t\t\t<td>{{coupon.image}}</td>\n\t\t</tr>\n\t\t<button (click)=\"getCoupons()\">UpDate</button>\n\t</table>\n</div>\n"
 
 /***/ }),
 
@@ -203,6 +203,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_customer_service_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/customer-service.service */ "./src/app/services/customer-service.service.ts");
 /* harmony import */ var _common_coupon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/coupon */ "./src/app/common/coupon.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -215,17 +217,35 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var BuyCouponComponent = /** @class */ (function () {
     function BuyCouponComponent(_customerService) {
         this._customerService = _customerService;
         this.coupon = new _common_coupon__WEBPACK_IMPORTED_MODULE_2__["Coupon"](0, "", "", "", 0, null, "", 0, "");
     }
     BuyCouponComponent.prototype.buyCoupon = function () {
-        this._customerService.buyCoupon(this.id);
+        this._customerService.buyCoupon(this.id).subscribe(function (resp) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()("Coupon purchased");
+        }, function (error) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()(error._body);
+        });
+        console.log("buy it");
     };
     BuyCouponComponent.prototype.getCoupons = function () {
-        this._customerService.getAllCoupon();
-        this._couponList = this._customerService.coupons;
+        var _this = this;
+        if (this.filter == "All") {
+            this._customerService.getAllCoupon().subscribe(function (resp) {
+                return _this._couponList = resp.json();
+            });
+        }
+        else {
+            // need to create All coupons sorted by 
+            this._customerService.getCouponsByType(this.filter).subscribe(function (resp) {
+                return _this._couponList = resp.json();
+            });
+        }
+        // this._customerService.getAllCoupon();
+        // this._couponList = this._customerService.coupons;
     };
     BuyCouponComponent.prototype.ngOnInit = function () {
     };
@@ -262,7 +282,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  show-my-coupons works!\n</p>\n"
+module.exports = "<div class=\"panel panel-primary\" style=\"margin: 5%\">\n\t<div class=\"panel-heading\">\n\t\t<h5 style=\"font-weight: bold \">All Coupons</h5>\n\t\t<span>Sort Coupons by Type : </span>\n\t\t<select name=\"filter\" id=\"filter\" (change)=\"getMyCoupons()\" class=\"form-control inputstl\"\n\t\tstyle=\"width: 10%\" [(ngModel)]=\"filter\" > \n\t\t\t<option selected value=\"All\" >All Coupons</option>\n\t\t\t<option value=\"RESTAURANTS\">RESTAURANTS</option>\n\t\t\t<option value=\"ELECTRICITY\">ELECTRICITY</option>\n\t\t\t<option value=\"FOOD\">FOOD</option>\n\t\t\t<option value=\"HEALTH\">HEALTH</option>\n\t\t\t<option value=\"SPORTS\">SPORTS</option>\n\t\t\t<option value=\"CAMPING\">CAMPING</option>\n\t\t\t<option value=\"TRAVELLING\">TRAVELLING</option>\n\n\t\t</select>\n\t</div>\n\n\n\t<table class=\"table table-striped table-bordered\">\n\t\t<tr>\n\t\t\t<th>Id</th>\n\t\t\t<th>Title</th>\n\t\t\t<th>Start Date</th>\n\t\t\t<th>End Date</th>\n\t\t\t<th>Amount</th>\n\t\t\t<th>Coupon Type</th>\n\t\t\t<th>Message</th>\n\t\t\t<th>Price</th>\n\t\t\t<th>Image</th>\n\t\t</tr>\n\t\t<tr *ngFor=\"let coupon of _myCoupons\">\n\t\t\t<td>{{coupon.id}}</td>\n\t\t\t<td>{{coupon.title}}</td>\n\t\t\t<td>{{coupon.startDate}}</td>\n\t\t\t<td>{{coupon.endDate}}</td>\n\t\t\t<td>{{coupon.amount}}</td>\n\t\t\t<td>{{coupon.type}}</td>\n\t\t\t<td>{{coupon.message}}</td>\n\t\t\t<td>{{coupon.price}}</td>\n\t\t\t<td>{{coupon.image}}</td>\n\t\t</tr>\n\t\t<button (click)=\"getMyCoupons()\">UpDate</button>\n\t</table>\n</div>"
 
 /***/ }),
 
@@ -277,6 +297,7 @@ module.exports = "<p>\n  show-my-coupons works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShowMyCouponsComponent", function() { return ShowMyCouponsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_customer_service_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/customer-service.service */ "./src/app/services/customer-service.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -287,9 +308,24 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var ShowMyCouponsComponent = /** @class */ (function () {
-    function ShowMyCouponsComponent() {
+    function ShowMyCouponsComponent(_customerService) {
+        this._customerService = _customerService;
     }
+    ShowMyCouponsComponent.prototype.getMyCoupons = function () {
+        var _this = this;
+        if (this.filter == "All") {
+            this._customerService.getAllMyCoupons().subscribe(function (resp) {
+                _this._myCoupons = resp.json();
+            });
+        }
+        else {
+            this._customerService.getCouponsByType(this.filter).subscribe(function (resp) {
+                _this._myCoupons = resp.json();
+            });
+        }
+    };
     ShowMyCouponsComponent.prototype.ngOnInit = function () {
     };
     ShowMyCouponsComponent = __decorate([
@@ -298,7 +334,7 @@ var ShowMyCouponsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./show-my-coupons.component.html */ "./src/app/components/show-my-coupons/show-my-coupons.component.html"),
             styles: [__webpack_require__(/*! ./show-my-coupons.component.css */ "./src/app/components/show-my-coupons/show-my-coupons.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_customer_service_service__WEBPACK_IMPORTED_MODULE_1__["CustomerServiceService"]])
     ], ShowMyCouponsComponent);
     return ShowMyCouponsComponent;
 }());
@@ -335,16 +371,18 @@ var CustomerServiceService = /** @class */ (function () {
         this._http = _http;
     }
     CustomerServiceService.prototype.buyCoupon = function (id) {
-        this._http.get("http://localhost:8082/customer/purchaseCoupon/" + id).subscribe(function (resp) {
-            console.log(resp.status);
-        });
+        return this._http.get("http://localhost:8082/customer/purchaseCoupon/" + id);
     };
     CustomerServiceService.prototype.getAllCoupon = function () {
-        var _this = this;
-        this._http.get("http://localhost:8082//customer/getAllCoupons/").subscribe(function (resp) {
-            _this.coupons = resp.json();
-            console.log(resp);
-        });
+        return this._http.get("http://localhost:8082//customer/getAllCoupons/");
+    };
+    CustomerServiceService.prototype.getCouponsByType = function (reference) {
+        console.log;
+        return this._http.get("http://localhost:8082/customer/getMyCouponsSortedByType/TYPE/" + reference);
+    };
+    CustomerServiceService.prototype.getAllMyCoupons = function () {
+        console.log("chech 2");
+        return this._http.get("http://localhost:8082/customer/getAllMyCoupons");
     };
     CustomerServiceService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

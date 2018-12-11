@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel\">\n  <div class=\"panel-heading\"><h1>Welcome to Company home page</h1></div>\n</div>  \n\n<nav class=\"navbar navbar-light\" style=\"background-color: #e3f2fd;\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"\n                data-target=\".navbar-collapse\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n    </div>\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li class=\"active\"><a routerLink=\"#\">Home</a></li>\n            <li><a routerLink=\"/getallcoupons\">Get My coupons</a></li>\n            <li><a routerLink=\"/createcoupons\">Create coupon</a></li>\n            <li><a routerLink=\"/removeupdatecoupon\">Remove/Update coupon</a></li>\n            <li><a routerLink=\"/getcouponbyid\">Get coupon by ID</a></li>\n        </ul>\n        \n    </div>\n</nav>\n<router-outlet></router-outlet>\n\n\n\n"
+module.exports = "<div class=\"panel\">\n  <div class=\"panel-heading\"><h1>Welcome to Company home page</h1></div>\n</div>  \n\n<nav class=\"navbar navbar-light\" style=\"background-color: #e3f2fd;\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"\n                data-target=\".navbar-collapse\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n    </div>\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li class=\"active\"><a routerLink=\"#\">Home</a></li>\n            <li><a routerLink=\"/getallcoupons\">Get My coupons</a></li>\n            <li><a routerLink=\"/createcoupons\">Create coupon</a></li>\n            <li><a routerLink=\"/removeupdatecoupon\">Remove/Update coupon</a></li>\n        </ul>\n        \n    </div>\n</nav>\n<router-outlet></router-outlet>\n\n\n\n"
 
 /***/ }),
 
@@ -184,6 +184,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Coupon", function() { return Coupon; });
 var Coupon = /** @class */ (function () {
     function Coupon(id, title, startDate, endDate, amount, type, message, price, image) {
+        this.id = id;
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.amount = amount;
+        this.type = type;
+        this.message = message;
+        this.price = price;
+        this.image = image;
     }
     return Coupon;
 }());
@@ -210,7 +219,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-primary\" style=\"width: 40% ; margin: 2%\" >\n\t<div class=\"panel-heading\">\n\t\t<h5 style=\"font-weight: bold;\">Create new Coupon</h5>\n\t</div>\n\t<form class=\"form\" style=\"margin : 2%\">\n\t\t<label for=\"\">Coupon ID</label>\n\t\t<input name=\"id\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.id\">\n\t\t<label for=\"\">Coupon Title</label>\n\t\t<input name=\"title\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.title\">\n\t\t<label for=\"\">Start Date</label>\n\t\t<input name=\"startDate\" type=\"Date\" class=\"form-control\" [(ngModel)]=\"addCoupon.startDate\">\n\t\t<label for=\"\">End Date</label>\n\t\t<input name=\"endDate\" type=\"Date\" class=\"form-control\" [(ngModel)]=\"addCoupon.endDate\">\n\t\t<label for=\"\">Amount</label>\n\t\t<input name=\"amount\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.amount\">\n\t\t<label for=\"\">Coupon Type</label>\n\t\t<input name=\"type\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.type\">\n\t\t<label for=\"\">Message</label>\n\t\t<input name=\"message\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.message\">\n\t\t<label for=\"\">Price</label>\n\t\t<input name=\"message\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.price\">\n\t\t<label for=\"\">Image</label>\n\t\t<input name=\"image\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.image\">\n\t\t<button style=\"margin: 1%\"class=\"btn btn-primary\" (click)=\"createCoupon()\">Create</button>\n\t</form>\n</div>"
+module.exports = "<div class=\"panel panel-primary\" style=\"width: 20% ; margin: 2%\" >\n\t<div class=\"panel-heading\">\n\t\t<h5 style=\"font-weight: bold;\">Create new Coupon</h5>\n\t</div>\n\t<form class=\"form\" style=\"margin : 2%\">\n\t\t<label for=\"\">Coupon ID</label>\n\t\t<input name=\"id\" type=\"number\" class=\"form-control\" [(ngModel)]=\"addCoupon.id\">\n\t\t<label for=\"\">Coupon Title</label>\n\t\t<input name=\"title\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.title\">\n\t\t<label for=\"\">Start Date</label>\n\t\t<input name=\"startDate\" type=\"Date\" class=\"form-control\" [(ngModel)]=\"addCoupon.startDate\">\n\t\t<label for=\"\">End Date</label>\n\t\t<input name=\"endDate\" type=\"Date\" class=\"form-control\" [(ngModel)]=\"addCoupon.endDate\">\n\t\t<label for=\"\">Amount</label>\n\t\t<input name=\"amount\" type=\"number\" class=\"form-control\" [(ngModel)]=\"addCoupon.amount\">\n\n\t\t<!-- <label for=\"\">Coupon Type</label>\n\t\t<input name=\"type\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.type\"> -->\n\t\t<label for=\"\">Coupon Type</label>\n\t\t\t<br>\n\t\t\t<select name=\"type\" style=\"width: 100%\" [(ngModel)]=\"addCoupon.type\" > \n\t\t\t<option seleccted value=\"RESTAURANTS\">RESTAURANTS</option>\n\t\t\t<option value=\"ELECTRICITY\">ELECTRICITY</option>\n\t\t\t<option value=\"FOOD\">FOOD</option>\n\t\t\t<option value=\"HEALTH\">HEALTH</option>\n\t\t\t<option value=\"SPORTS\">SPORTS</option>\n\t\t\t<option value=\"CAMPING\">CAMPING</option>\n\t\t\t<option value=\"TRAVELLING\">TRAVELLING</option>\n\t\t</select>\n\t\t<br>\n\t\t<label for=\"\">Message</label>\n\t\t<input name=\"message\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.message\">\n\t\t<label for=\"\">Price</label>\n\t\t<input name=\"message\" type=\"number\" class=\"form-control\" [(ngModel)]=\"addCoupon.price\">\n\t\t<label for=\"\">Image</label>\n\t\t<input name=\"image\" type=\"text\" class=\"form-control\" [(ngModel)]=\"addCoupon.image\">\n\t\t<button style=\"margin: 1%\"class=\"btn btn-primary\" (click)=\"createCoupon()\">Create</button>\n\t</form>\n</div>"
 
 /***/ }),
 
@@ -282,7 +291,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-primary\" style=\"margin: 5%\">\n\t<div class=\"panel-heading\">\n\t\t{{filter}}\n\t\t<h5 style=\"font-weight: bold \">All Coupons</h5>\n\t\t<span>Sort Coupons by Type : </span>\n\t\t<select name=\"filter\" id=\"filter\" (change)=\"onChangeGet()\" class=\"form-control inputstl\"\n\t\tstyle=\"width: 10%\" [(ngModel)]=\"filter\" > \n\t\t\t<option value=\"All Coupons\">All Coupons</option>\n\t\t\t<option value=\"RESTAURANTS\">RESTAURANTS</option>\n\t\t\t<option value=\"ELECTRICITY\">ELECTRICITY</option>\n\t\t\t<option value=\"FOOD\">FOOD</option>\n\t\t\t<option value=\"HEALTH\">HEALTH</option>\n\t\t\t<option value=\"SPORTS\">SPORTS</option>\n\t\t\t<option value=\"CAMPING\">CAMPING</option>\n\t\t\t<option value=\"TRAVELLING\">TRAVELLING</option>\n\n\t\t</select>\n\t</div>\n\t<table class=\"table table-striped table-bordered\">\n\t\t<tr>\n\t\t\t<th>Id</th>\n\t\t\t<th>Title</th>\n\t\t\t<th>Start Date</th>\n\t\t\t<th>End Date</th>\n\t\t\t<th>Amount</th>\n\t\t\t<th>Coupon Type</th>\n\t\t\t<th>Message</th>\n\t\t\t<th>Price</th>\n\t\t\t<th>Image</th>\n\t\t</tr>\n\t\t<tr *ngFor=\"let coupon of _couponList\">\n\t\t\t<td>{{coupon.id}}</td>\n\t\t\t<td>{{coupon.title}}</td>\n\t\t\t<td>{{coupon.startDate}}</td>\n\t\t\t<td>{{coupon.endDate}}</td>\n\t\t\t<td>{{coupon.amount}}</td>\n\t\t\t<td>{{coupon.type}}</td>\n\t\t\t<td>{{coupon.message}}</td>\n\t\t\t<td>{{coupon.price}}</td>\n\t\t\t<td>{{coupon.image}}</td>\n\t\t</tr>\n\t\t<button (click)=\"getCoupons()\">UpDate</button>\n\t</table>\n</div>\n"
+module.exports = "<div class=\"panel panel-primary\" style=\"margin: 5%\">\n\t<div class=\"panel-heading\">\n\t\t<h5 style=\"font-weight: bold \">All Coupons</h5>\n\t\t<span>Sort Coupons by Type : </span>\n\t\t<select name=\"filter\" id=\"filter\" (change)=\"onChangeGet()\" class=\"form-control inputstl\"\n\t\tstyle=\"width: 10%\" [(ngModel)]=\"filter\" > \n\t\t\t<option value=\"All Coupons\">All Coupons</option>\n\t\t\t<option value=\"RESTAURANTS\">RESTAURANTS</option>\n\t\t\t<option value=\"ELECTRICITY\">ELECTRICITY</option>\n\t\t\t<option value=\"FOOD\">FOOD</option>\n\t\t\t<option value=\"HEALTH\">HEALTH</option>\n\t\t\t<option value=\"SPORTS\">SPORTS</option>\n\t\t\t<option value=\"CAMPING\">CAMPING</option>\n\t\t\t<option value=\"TRAVELLING\">TRAVELLING</option>\n\n\t\t</select>\n\t</div>\n\t<table class=\"table table-striped table-bordered\">\n\t\t<tr>\n\t\t\t<th>Id</th>\n\t\t\t<th>Title</th>\n\t\t\t<th>Start Date</th>\n\t\t\t<th>End Date</th>\n\t\t\t<th>Amount</th>\n\t\t\t<th>Coupon Type</th>\n\t\t\t<th>Message</th>\n\t\t\t<th>Price</th>\n\t\t\t<th>Image</th>\n\t\t</tr>\n\t\t<tr *ngFor=\"let coupon of _couponList\">\n\t\t\t<td>{{coupon.id}}</td>\n\t\t\t<td>{{coupon.title}}</td>\n\t\t\t<td>{{coupon.startDate}}</td>\n\t\t\t<td>{{coupon.endDate}}</td>\n\t\t\t<td>{{coupon.amount}}</td>\n\t\t\t<td>{{coupon.type}}</td>\n\t\t\t<td>{{coupon.message}}</td>\n\t\t\t<td>{{coupon.price}}</td>\n\t\t\t<td>{{coupon.image}}</td>\n\t\t</tr>\n\t\t<button (click)=\"getCoupons()\">UpDate</button>\n\t</table>\n</div>\n"
 
 /***/ }),
 
@@ -327,7 +336,6 @@ var GetAllCouponsComponent = /** @class */ (function () {
         }
         else {
             this._companyRest.getCouponByType(this.filter);
-            console.log("else");
         }
     };
     GetAllCouponsComponent = __decorate([
@@ -501,7 +509,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-primary\" style=\"height:110px;width: 20%; margin: 2%\">\n\t<div class=\"panel-heading\">\n\t\t<label class=\"radio-inline\"><input type=\"radio\" name=\"byId\" checked>Search by ID</label>\n\t\t<label class=\"radio-inline\"><input type=\"radio\" name=\"byName\">Search by Name</label>\n\t\t<input type=\"text\" name=\"\" class=\"form-control\" [(ngModel)]=\"couponId\" placeholder=\"Coupon Name or ID number\">\n\t\t</div>\n\t\t<button (click)=\"getCouponById()\" class=\"btn btn-primary\" class=\"btn btn-primary btn-block\">Find Cuopon</button>\n\t\n</div>\n<div class=\"panel panel-primary\" style=\"width: 20% ; margin: 2%\" >\n\t<div class=\"panel-heading\">\n\t\t<h5 style=\"font-weight: bold;\">Create new Coupon</h5>\n\t</div>\n\t<form class=\"form\" style=\"margin : 2%\">\n\t\t<label for=\"\">Coupon ID</label>\n\t\t<input name=\"id\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.id\">\n\t\t<label for=\"\">Coupon Title</label>\n\t\t<input name=\"title\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.title\">\n\t\t<label for=\"\">Start Date</label>\n\t\t<input name=\"startDate\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.startDate\">\n\t\t<label for=\"\">End Date</label>\n\t\t<input name=\"endDate\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.endDate\">\n\t\t<label for=\"\">Amount</label>\n\t\t<input name=\"amount\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.amount\">\n\t\t<label for=\"\">Coupon Type</label>\n\t\t<input name=\"type\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.type\">\n\t\t<label for=\"\">Message</label>\n\t\t<input name=\"message\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.message\">\n\t\t<label for=\"\">Price</label>\n\t\t<input name=\"message\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.price\">\n\t\t<label for=\"\">Image</label>\n\t\t<input name=\"image\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.image\">\n\t\t<button style=\"margin: 1%\"class=\"btn btn-primary\" (click)=\"removeCoupon()\">Remove</button>\n\t\t<button style=\"margin: 1%\"class=\"btn btn-primary\" (click)=\"updateCoupon()\">Update</button>\n\t</form>\n</div>"
+module.exports = "<div class=\"panel panel-primary\" style=\"height:110px;width: 20%; margin: 2%\">\n\t<div class=\"panel-heading\">\n\t\t<label class=\"radio-inline\"><input type=\"radio\" name=\"byId\" checked>Search by ID</label>\n\t\t<label class=\"radio-inline\"><input type=\"radio\" name=\"byName\">Search by Name</label>\n\t\t<input type=\"text\" name=\"\" class=\"form-control\" [(ngModel)]=\"couponId\" placeholder=\"Coupon Name or ID number\">\n\t\t</div>\n\t\t<button (click)=\"getCouponById()\" class=\"btn btn-primary\" class=\"btn btn-primary btn-block\">Find Cuopon</button>\n\t\n</div>\n<div class=\"panel panel-primary\" style=\"width: 20% ; margin: 2%\" >\n\t<div class=\"panel-heading\">\n\t\t<h5 style=\"font-weight: bold;\">Create new Coupon</h5>\n\t</div>\n\t<form class=\"form\" style=\"margin : 2%\">\n\t\t<label for=\"\">Coupon ID</label>\n\t\t<input name=\"id\" type=\"number\" class=\"form-control\" [(ngModel)]=\"coupon.id\">\n\t\t<label for=\"\">Coupon Title</label>\n\t\t<input name=\"title\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.title\">\n\t\t<label for=\"\">Start Date</label>\n\t\t<input name=\"startDate\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.startDate\">\n\t\t<label for=\"\">End Date</label>\n\t\t<input name=\"endDate\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.endDate\">\n\t\t<label for=\"\">Amount</label>\n\t\t<input name=\"amount\" type=\"number\" class=\"form-control\" [(ngModel)]=\"coupon.amount\">\n\t\t<label for=\"\">Coupon Type</label>\n\t\t<input name=\"type\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.type\">\n\t\t<label for=\"\">Message</label>\n\t\t<input name=\"message\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.message\">\n\t\t<label for=\"\">Price</label> \n\t\t<input name=\"price\" type=\"number\" class=\"form-control\" [(ngModel)]=\"coupon.price\">\n\t\t<label for=\"\">Image</label>\n\t\t<input name=\"image\" type=\"text\" class=\"form-control\" [(ngModel)]=\"coupon.image\">\n\t\t<button style=\"margin: 1%\"class=\"btn btn-primary\" (click)=\"removeCoupon()\">Remove</button>\n\t\t<button style=\"margin: 1%\"class=\"btn btn-primary\" (click)=\"updateCoupon()\">Update</button>\n\t</form>\n</div>"
 
 /***/ }),
 
@@ -518,6 +526,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _common_coupon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/coupon */ "./src/app/common/coupon.ts");
 /* harmony import */ var _services_comapny_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/comapny.service */ "./src/app/services/comapny.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -527,6 +537,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -541,6 +552,8 @@ var RemoveUpdateCouponComponent = /** @class */ (function () {
         var _this = this;
         this._companyService.getCouponById(this.couponId).subscribe(function (resp) {
             _this.coupon = resp.json();
+        }, function (error) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()(error._body);
         });
     };
     RemoveUpdateCouponComponent.prototype.removeCoupon = function () {
@@ -576,6 +589,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComapnyService", function() { return ComapnyService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -585,6 +600,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 var ComapnyService = /** @class */ (function () {
@@ -598,9 +614,11 @@ var ComapnyService = /** @class */ (function () {
         });
     };
     ComapnyService.prototype.createCoupon = function (Coupon) {
+        var _this = this;
         console.log(Coupon);
         this._http.post("http://localhost:8082/company/createCoupon", Coupon).subscribe(function (resp) {
-            console.log(resp.status);
+            _this.newCoupon = resp.json();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon ' + _this.newCoupon.title + ' created');
         });
     };
     ComapnyService.prototype.getCouponById = function (id) {
@@ -608,13 +626,17 @@ var ComapnyService = /** @class */ (function () {
         return this._http.get("http://localhost:8082/company/getCouponById/" + id);
     };
     ComapnyService.prototype.removeCoupon = function (id) {
+        var _this = this;
         this._http.delete("http://localhost:8082/company/removeCoupon/" + id).subscribe(function (resp) {
-            console.log(resp.status);
+            _this.newCoupon = resp.json();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon with ID: ' + _this.newCoupon + ' removed');
         });
     };
     ComapnyService.prototype.updateCoupon = function (coupon) {
+        var _this = this;
         this._http.put("http://localhost:8082/company/updateCoupon", coupon).subscribe(function (resp) {
-            console.log(resp.status);
+            _this.newCoupon = resp.json();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon with ID : ' + _this.newCoupon.id + ' updated');
         });
     };
     ComapnyService.prototype.getCouponByType = function (filter) {
@@ -622,6 +644,8 @@ var ComapnyService = /** @class */ (function () {
         console.log("into byType");
         this._http.get("http://localhost:8082/company/sortCouponBy/TYPE/" + filter).subscribe(function (resp) {
             _this.couponList = resp.json();
+        }, function (error) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()(error._body);
         });
     };
     ComapnyService = __decorate([
