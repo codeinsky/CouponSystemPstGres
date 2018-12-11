@@ -63,7 +63,7 @@ public class CompanyFacadeF extends ClientCouponFacade {
 
 	public Company getMyCompany() {
 		Company myCompany = null;
-		myCompany = companyRepo.findById(companyIdLogged).get();
+		myCompany = companyRepo.findById(this.getCompanyIdLogged()).get();
 		return myCompany;
 	}	
 	
