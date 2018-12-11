@@ -50,9 +50,9 @@ public class LogIn {
 			case "admin":
 					return "redirect:https://couponsystemv1.herokuapp.com/admin/index.html";
 			case "company":
-					return "redirect:https://couponsystemv1.herokuapp.com/index.html";
+					return "redirect:https://couponsystemv1.herokuapp.com/company/index.html";
 			case "customer":
-					return "redirect:https://couponsystemv1.herokuapp.com/index.html";
+					return "redirect:https://couponsystemv1.herokuapp.com/customer/index.html";
 		}
 		
 		return "redirect:https://couponsystemv1.herokuapp.com/login.html";
