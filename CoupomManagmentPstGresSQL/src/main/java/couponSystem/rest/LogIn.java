@@ -48,14 +48,14 @@ public class LogIn {
 		switch (usertype)
 		{
 			case "admin":
-					return "redirect:http://localhost:8082/admin/index.html";
+					return "redirect:https://couponsystemv1.herokuapp.com/admin/index.html";
 			case "company":
-					return "redirect:http://localhost:8082/company/index.html";
+					return "redirect:https://couponsystemv1.herokuapp.com/index.html";
 			case "customer":
-					return "redirect:http://localhost:8082/customer/index.html";
+					return "redirect:https://couponsystemv1.herokuapp.com/index.html";
 		}
 		
-		return "redirect:http://localhost:8082/login.html";
+		return "redirect:https://couponsystemv1.herokuapp.com/login.html";
 	}
 			
 			
