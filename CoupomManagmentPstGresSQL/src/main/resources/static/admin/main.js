@@ -735,15 +735,18 @@ var AdminRequestsService = /** @class */ (function () {
     }
     AdminRequestsService.prototype.getAllComapnies = function () {
         var _this = this;
-        this.http.get("http://localhost:8082/admin/getAllCompanies").subscribe(function (resp) {
+        //this.http.get("http://localhost:8082/admin/getAllCompanies").subscribe(
+        this.http.get("https://couponsystemv1.herokuapp.com/admin/getAllCompanies").subscribe(function (resp) {
             _this.companies = resp.json();
         });
     };
     AdminRequestsService.prototype.createNewCopmany = function (company) {
-        return this.http.post("http://localhost:8082/admin/createCompany", company);
+        // return this.http.post("http://localhost:8082/admin/createCompany" , company);
+        return this.http.post("https://couponsystemv1.herokuapp.com/admin/createCompany", company);
     };
     AdminRequestsService.prototype.searchCompanyById = function (id) {
-        return this.http.get("http://localhost:8082/admin/getCompany/" + id);
+        //return  this.http.get("http://localhost:8082/admin/getCompany/" + id)
+        return this.http.get("https://couponsystemv1.herokuapp.com/admin/getCompany/" + id);
     };
     // need to create for in Server Side 
     AdminRequestsService.prototype.searchCompanyByName = function (name) {
@@ -754,7 +757,8 @@ var AdminRequestsService = /** @class */ (function () {
         var options = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestOptions"]({
             body: company,
         });
-        this.http.delete("http://localhost:8082/admin/removeCompany", options).subscribe(function (resp) {
+        // this.http.delete("http://localhost:8082/admin/removeCompany" , options).subscribe(
+        this.http.delete("https://couponsystemv1.herokuapp.com/admin/removeCompany", options).subscribe(function (resp) {
             if (resp.status == 200) {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Company was removed');
             }
@@ -762,7 +766,8 @@ var AdminRequestsService = /** @class */ (function () {
     };
     AdminRequestsService.prototype.updateCompany = function (company) {
         var _this = this;
-        this.http.put("http://localhost:8082/admin/companyDetailsUpdate", company).subscribe(function (resp) {
+        // this.http.put("http://localhost:8082/admin/companyDetailsUpdate" , company).subscribe(
+        this.http.put("https://couponsystemv1.herokuapp.com/admin/companyDetailsUpdate", company).subscribe(function (resp) {
             _this.company = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Company ' + _this.company.compName + ' was Updated');
         });
@@ -770,12 +775,14 @@ var AdminRequestsService = /** @class */ (function () {
     // Customer Services 
     AdminRequestsService.prototype.getAllCustomers = function () {
         var _this = this;
-        this.http.get("http://localhost:8082/admin/getCustomerList").subscribe(function (resp) {
+        // this.http.get("http://localhost:8082/admin/getCustomerList").subscribe(
+        this.http.get("https://couponsystemv1.herokuapp.com/admin/getCustomerList").subscribe(function (resp) {
             _this.customers = resp.json();
         });
     };
     AdminRequestsService.prototype.createCustomer = function (customer) {
-        return this.http.post("http://localhost:8082/admin/addCustomer", customer);
+        // return this.http.post("http://localhost:8082/admin/addCustomer" , customer); 
+        return this.http.post("https://couponsystemv1.herokuapp.com/admin/addCustomer", customer);
         // this.http.post("http://localhost:8082/admin/addCustomer" , customer).subscribe(
         //   (resp)=>{
         //     this.customer = resp.json(); 
@@ -783,11 +790,13 @@ var AdminRequestsService = /** @class */ (function () {
         //   })
     };
     AdminRequestsService.prototype.searchCustomerById = function (id) {
-        return this.http.get("http://localhost:8082/admin/getCustomer/" + id);
+        //return this.http.get("http://localhost:8082/admin/getCustomer/" + id);
+        return this.http.get("https://couponsystemv1.herokuapp.com/admin/getCustomer/" + id);
     };
     AdminRequestsService.prototype.updateCustomer = function (customer) {
         var _this = this;
-        this.http.put("http://localhost:8082/admin/updateCustomerDetails", customer).subscribe(function (resp) {
+        // this.http.put("http://localhost:8082/admin/updateCustomerDetails", customer).subscribe(
+        this.http.put("https://couponsystemv1.herokuapp.com/admin/updateCustomerDetails", customer).subscribe(function (resp) {
             _this.customer = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Customer ' + _this.customer.custName + ' updated');
         });
@@ -797,7 +806,8 @@ var AdminRequestsService = /** @class */ (function () {
         var options = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestOptions"]({
             body: customer
         });
-        this.http.delete("http://localhost:8082/admin/removeCustomer", options).subscribe(function (resp) {
+        //this.http.delete("http://localhost:8082/admin/removeCustomer" , options).subscribe(
+        this.http.delete("https://couponsystemv1.herokuapp.com/admin/removeCustomer", options).subscribe(function (resp) {
             _this.customer = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Customer ' + _this.customer.custName + ' removed');
         });

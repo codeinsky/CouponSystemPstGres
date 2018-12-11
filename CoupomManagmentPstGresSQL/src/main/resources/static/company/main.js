@@ -609,32 +609,32 @@ var ComapnyService = /** @class */ (function () {
     }
     ComapnyService.prototype.getAllCoupons = function () {
         var _this = this;
-        this._http.get("http://localhost:8082/company/getAllCoupons").subscribe(function (resp) {
+        this._http.get("https://couponsystemv1.herokuapp.com/company/getAllCoupons").subscribe(function (resp) {
             _this.couponList = resp.json();
         });
     };
     ComapnyService.prototype.createCoupon = function (Coupon) {
         var _this = this;
         console.log(Coupon);
-        this._http.post("http://localhost:8082/company/createCoupon", Coupon).subscribe(function (resp) {
+        this._http.post("https://couponsystemv1.herokuapp.com/company/createCoupon", Coupon).subscribe(function (resp) {
             _this.newCoupon = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon ' + _this.newCoupon.title + ' created');
         });
     };
     ComapnyService.prototype.getCouponById = function (id) {
         console.log(id);
-        return this._http.get("http://localhost:8082/company/getCouponById/" + id);
+        return this._http.get("https://couponsystemv1.herokuapp.com/company/getCouponById/" + id);
     };
     ComapnyService.prototype.removeCoupon = function (id) {
         var _this = this;
-        this._http.delete("http://localhost:8082/company/removeCoupon/" + id).subscribe(function (resp) {
+        this._http.delete("https://couponsystemv1.herokuapp.com/company/removeCoupon/" + id).subscribe(function (resp) {
             _this.newCoupon = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon with ID: ' + _this.newCoupon + ' removed');
         });
     };
     ComapnyService.prototype.updateCoupon = function (coupon) {
         var _this = this;
-        this._http.put("http://localhost:8082/company/updateCoupon", coupon).subscribe(function (resp) {
+        this._http.put("https://couponsystemv1.herokuapp.com/company/updateCoupon", coupon).subscribe(function (resp) {
             _this.newCoupon = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon with ID : ' + _this.newCoupon.id + ' updated');
         });
@@ -642,7 +642,7 @@ var ComapnyService = /** @class */ (function () {
     ComapnyService.prototype.getCouponByType = function (filter) {
         var _this = this;
         console.log("into byType");
-        this._http.get("http://localhost:8082/company/sortCouponBy/TYPE/" + filter).subscribe(function (resp) {
+        this._http.get("https://couponsystemv1.herokuapp.com/company/sortCouponBy/TYPE/" + filter).subscribe(function (resp) {
             _this.couponList = resp.json();
         }, function (error) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()(error._body);

@@ -371,18 +371,18 @@ var CustomerServiceService = /** @class */ (function () {
         this._http = _http;
     }
     CustomerServiceService.prototype.buyCoupon = function (id) {
-        return this._http.get("http://localhost:8082/customer/purchaseCoupon/" + id);
+        return this._http.get("https://couponsystemv1.herokuapp.com/customer/purchaseCoupon/" + id);
     };
     CustomerServiceService.prototype.getAllCoupon = function () {
-        return this._http.get("http://localhost:8082//customer/getAllCoupons/");
+        return this._http.get("https://couponsystemv1.herokuapp.com/customer/getAllCoupons/");
     };
     CustomerServiceService.prototype.getCouponsByType = function (reference) {
         console.log;
-        return this._http.get("http://localhost:8082/customer/getMyCouponsSortedByType/TYPE/" + reference);
+        return this._http.get("https://couponsystemv1.herokuapp.com/customer/getMyCouponsSortedByType/TYPE/" + reference);
     };
     CustomerServiceService.prototype.getAllMyCoupons = function () {
         console.log("chech 2");
-        return this._http.get("http://localhost:8082/customer/getAllMyCoupons");
+        return this._http.get("https://couponsystemv1.herokuapp.com/customer/getAllMyCoupons");
     };
     CustomerServiceService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
