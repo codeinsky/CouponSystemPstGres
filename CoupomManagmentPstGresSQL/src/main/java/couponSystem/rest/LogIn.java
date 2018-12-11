@@ -37,7 +37,7 @@ public class LogIn {
 		if (cf == null) // login failed!
 		{
 			System.out.println("wrong Log in , go back");
-			return "redirect:http://localhost:8082/login.html";
+			return "redirect:https://couponsystemv1.herokuapp.com/login.html";
 		}
 
 		// success!
