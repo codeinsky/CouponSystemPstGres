@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *  - Getters and setters for each Attribute 
  */
 @Entity(name="COMPANY")
+@XmlRootElement
 public class Company {
 	
 	/** The id. */

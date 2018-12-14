@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 // TODO: Auto-generated Javadoc
 
@@ -25,6 +26,7 @@ import javax.persistence.ManyToMany;
  *  - Getter and Setters for all attributes  
  */ 
 @Entity(name="COUPON")
+@XmlRootElement
 public class Coupon  {
 	
 	/** The id. */

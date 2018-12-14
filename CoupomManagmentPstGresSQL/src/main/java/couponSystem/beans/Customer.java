@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 // TODO: Auto-generated Javadoc
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *         attribute
  */
 @Entity(name="CUSTOMER")
+@XmlRootElement
 public class Customer {
 
 	/** The id. */
