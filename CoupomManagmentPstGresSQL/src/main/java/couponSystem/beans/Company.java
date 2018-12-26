@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 // TODO: Auto-generated Javadoc
@@ -26,7 +29,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Company {
 	
 	/** The id. */
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue
 	private int id;
 	
 	/** The comp name. */
@@ -41,7 +45,7 @@ public class Company {
 	@Column
 	private String email;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name="COMPANY_ID")
 	@JsonIgnore 
 	 private Collection<Coupon> coupons ;

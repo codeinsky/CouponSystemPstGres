@@ -87,9 +87,7 @@ public class CompanyFacadeF extends ClientCouponFacade {
 			else {  
 				System.out.println("Test from create company" + coupon.toString());
 				Company myComp  = getMyCompany();
-				Collection<Coupon> coupons = myComp.getCoupons();
-				coupons.add(coupon);
-				myComp.setCoupons(coupons);
+				myComp.getCoupons().add(coupon);
 				System.out.println("My company is :" + myComp.toString());
 				companyRepo.save(myComp);
 				createdCoupon = coupon;
@@ -110,9 +108,10 @@ public class CompanyFacadeF extends ClientCouponFacade {
 		Company myCompany = getMyCompany();
 		if (myCompany.checkCoupon(id)) {
 			myCompany.removeCoupon(id);
-			companyRepo.save(myCompany);
+			couponRepo.deleteById(id);
+			//companyRepo.save(myCompany);
 			System.out.println("Coupon was removed");
-			System.out.println("My coupons after delete : " + myCompany.getCoupons());
+			// System.out.println("My coupons after delete : " + myCompany.getCoupons());
 		}
 		
 		else {

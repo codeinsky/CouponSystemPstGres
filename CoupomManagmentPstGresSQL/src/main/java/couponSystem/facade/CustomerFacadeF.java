@@ -117,13 +117,11 @@ public class CustomerFacadeF extends ClientCouponFacade{
 			
 			
 		if (dateFlag && amountFlag && alreadyPurchasedFlag) {
-			int amount = checkedCoupon.getAmount();
-			checkedCoupon.setAmount(amount - 1);
-			couponRepo.save(checkedCoupon);
+			checkedCoupon.setAmount(checkedCoupon.getAmount()-1);
 			mySelf.buyCoupon(checkedCoupon);
-			System.out.println("I am : " + mySelf.toString());
-			customerRepo.save(mySelf);
-			System.out.println("Coupon with ID : " + id + " purchased  , enjoy it");
+			checkedCoupon.buyCoupon(mySelf);
+			couponRepo.save(checkedCoupon);
+
 
 		}
 		}

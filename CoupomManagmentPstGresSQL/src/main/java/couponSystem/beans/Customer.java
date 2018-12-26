@@ -12,6 +12,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 // TODO: Auto-generated Javadoc
 
@@ -40,10 +43,7 @@ public class Customer {
 	private String password;
 
 	/** The coupon. */
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH , CascadeType.MERGE , CascadeType.REFRESH})
-	@JoinTable(name = "customer_coupon",
-						joinColumns = @JoinColumn(name = "customer_id"),
-						inverseJoinColumns = @JoinColumn(name = "coupon_id"))
+	@ManyToMany(mappedBy="customers" ,fetch = FetchType.EAGER, cascade = {CascadeType.DETACH , CascadeType.MERGE , CascadeType.REFRESH })
 	@JsonIgnore 
 	private Collection<Coupon> coupons;
 
@@ -78,6 +78,10 @@ public class Customer {
 		Collection<Coupon> coupons = null ; 
 		coupons = this.getCoupons();
 		coupons.add(coupon);
+		this.setCoupons(coupons);
+		System.out.println("from buy coupon");
+	//	System.out.println("Coupons after purchase: " + this.toString());
+		
 	} 
 	
 	public boolean ifCouponsPurchased(int id) {
@@ -144,17 +148,36 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", custName=" + custName + ", password=" + password + ", coupons=" + coupons
 				+ "]";
 	}
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((custName == null) ? 0 : custName.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (custName == null) {
+			if (other.custName != null)
+				return false;
+		} else if (!custName.equals(other.custName))
+			return false;
+		return true;
+	}
+	
 
 }

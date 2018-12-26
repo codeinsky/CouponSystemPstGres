@@ -1,9 +1,11 @@
 package couponSystem.facade;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import couponSystem.beans.Company;
+import couponSystem.beans.Coupon;
 import couponSystem.beans.Customer;
 import couponSystem.exception.CouponSystemException;
 import couponSystem.repos.CompanyRepo;
@@ -64,9 +66,10 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 * @param company the company
 	 */
 	
+
 	public void  removeCompany(Company company) {
 		if (companyRepo.existsById(company.getId())) {
-			companyRepo.delete(company);
+			companyRepo.deleteById(company.getId());
 			System.out.println("Company removed");
 		}
 		else {
@@ -166,12 +169,20 @@ public class AdminFacadeF extends ClientCouponFacade{
 	 */
 
 	public Customer removeCustomer(Customer customer) {
-		Customer removedCustomer = null;
-		customerRepo.delete(customer);
-		removedCustomer = customer;
+
+		//  Retrieves all coupons that were purchased by Customer, that admin wants to remove  
+		ArrayList<Coupon> couponsOwnByCustomer = couponsRepo.findByCustomers_id(customer.getId());
+		// removes all relations Coupons Customer from join table prior removing the Customer 
+		for (Coupon coupon : couponsOwnByCustomer) {
+			System.out.println(coupon.getId());
+			System.out.println(coupon.getCustomers().remove(customer));
+			couponsRepo.save(coupon);
+			}
+		// removes the company 
+		customerRepo.deleteById(customer.getId());
 		System.out.println("Customer with name : " +customer.getCustName() +" Removed");
-		return removedCustomer;
-		// need to remove all other tables
+		return customer;
+		
 		
 	}
 
