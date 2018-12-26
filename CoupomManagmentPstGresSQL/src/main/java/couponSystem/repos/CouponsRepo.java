@@ -7,7 +7,6 @@ import couponSystem.beans.Customer;
 public interface CouponsRepo extends CrudRepository <Coupon , Integer>{
 	
 	public boolean existsByTitle(String title);
-	Customer findCustomerByCustName (String compName);
 	public ArrayList<Coupon> findByCustomers_id(int customerId);
 
 }
