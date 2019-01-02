@@ -54,13 +54,13 @@ public class CompanyRest {
 	 */
 	@RequestMapping (value="/company/createCoupon" , method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity createCoupon(@RequestBody Coupon coupon , HttpServletRequest request , HttpServletResponse response) {
-		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
 		try {
 			ServiceFilter.serviceFilter(request, response);
 		} catch (CouponSystemException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
 		}
-		myFacade.setCompanyIdLogged(3);
+		//myFacade.setCompanyIdLogged(3);
 		Coupon createdCoupon = myFacade.createCoupon(coupon);
 		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(createdCoupon);
 		
@@ -73,13 +73,13 @@ public class CompanyRest {
 	 */
 	@RequestMapping (value="/company/removeCoupon/{id}" , method = RequestMethod.DELETE)
 	public  @ResponseBody ResponseEntity deleteCoupon (@PathVariable ("id") int id , HttpServletRequest request , HttpServletResponse response) {
-		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
 		try {
 			ServiceFilter.serviceFilter(request, response);
 		} catch (CouponSystemException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
 		}
-		myFacade.setCompanyIdLogged(3);
+		//myFacade.setCompanyIdLogged(3);
 		int removedId = myFacade.removeCoupon(id);
 		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(removedId);
 		
@@ -92,13 +92,13 @@ public class CompanyRest {
 	 */
 	@RequestMapping (value = "/company/updateCoupon" , method = RequestMethod.PUT , consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity updateCoupon(@RequestBody Coupon coupon , HttpServletRequest request , HttpServletResponse response ) {
-		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
 		try {
 			ServiceFilter.serviceFilter(request, response);
 		} catch (CouponSystemException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
 		}
-		myFacade.setCompanyIdLogged(3);
+		//myFacade.setCompanyIdLogged(3);
 		Coupon updatedCoupon = myFacade.updateCoupon(coupon);
 		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(updatedCoupon);
 	
@@ -112,8 +112,8 @@ public class CompanyRest {
 	 */
 	@RequestMapping (value = "/company/getCouponById/{id}" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity getCouponByID (@PathVariable ("id") int id , HttpServletRequest request  , HttpServletResponse response) {
-		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
-		myFacade.setCompanyIdLogged(3);
+		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		//myFacade.setCompanyIdLogged(3);
 		try {
 			ServiceFilter.serviceFilter(request, response);
 		} catch (CouponSystemException e1) {
@@ -134,8 +134,8 @@ public class CompanyRest {
 	 */
 	@RequestMapping (value="/company/getAllCoupons" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity getAllCoupons(HttpServletRequest request , HttpServletResponse response){
-		 myFacade.setCompanyIdLogged(3);
-		 //CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		 //myFacade.setCompanyIdLogged(3);
+		 CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
 		 try {
 			ServiceFilter.serviceFilter(request, response);
 		} catch (CouponSystemException e) {
@@ -155,13 +155,13 @@ public class CompanyRest {
 	@RequestMapping (value="/company/sortCouponBy/{filter}/{reference}" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity getFiltertedCoupons(@PathVariable ("filter" ) String filter  , 
 			@PathVariable ("reference" ) String reference , HttpServletRequest request , HttpServletResponse response) {
-		myFacade.setCompanyIdLogged(3);
+		//myFacade.setCompanyIdLogged(3);
 		try {
 			ServiceFilter.serviceFilter(request, response);
 		} catch (CouponSystemException e1) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body(e1.getMessage());
 		}
-		//CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
+		CompanyFacadeF myFacade = (CompanyFacadeF) request.getSession().getAttribute("facade");
 		try {
 			Collection<Coupon> coupons =  myFacade.sortCouponBy(filter, reference);
 			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(coupons);
