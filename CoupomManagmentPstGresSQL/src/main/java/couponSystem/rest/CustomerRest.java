@@ -3,6 +3,7 @@ package couponSystem.rest;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,9 +41,14 @@ public class CustomerRest {
 	 * @param coupon the coupon
 	 */
 	@RequestMapping(value="/customer/purchaseCoupon/{id}" , method= RequestMethod.GET) 
-	public @ResponseBody ResponseEntity purchaseCoupon(@PathVariable ("id") int id , HttpServletRequest request) {
-		CustomerFacadeF myFacade = (CustomerFacadeF) request.getSession().getAttribute("facade");
-		//myFacade.setCustomerLogged(184);
+	public @ResponseBody ResponseEntity purchaseCoupon(@PathVariable ("id") int id ,HttpServletRequest request , HttpServletResponse response) {
+		try {
+			ServiceFilter.serviceFilter(request, response);
+		} catch (CouponSystemException e1) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body(e1.getMessage());
+		}
+		//CustomerFacadeF myFacade = (CustomerFacadeF) request.getSession().getAttribute("facade");
+		myFacade.setCustomerLogged(7);
 		try {
 			myFacade.purchaseCoupon(id);
 			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body("Coupon is Yours");
@@ -57,10 +63,16 @@ public class CustomerRest {
 	 * @return the my coupons
 	 */
 	@RequestMapping(value="/customer/getAllMyCoupons" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Coupon> getMyCoupons(HttpServletRequest request){
-		CustomerFacadeF myFacade = (CustomerFacadeF) request.getSession().getAttribute("facade");
-		//myFacade.setCustomerLogged(184);
-		return myFacade.getAllMyCoupons();
+	public @ResponseBody ResponseEntity getMyCoupons(HttpServletRequest request , HttpServletResponse response){
+		//CustomerFacadeF myFacade = (CustomerFacadeF) request.getSession().getAttribute("facade");
+		try {
+			ServiceFilter.serviceFilter(request, response);
+		} catch (CouponSystemException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
+		}
+		myFacade.setCustomerLogged(7);
+		// return myFacade.getAllMyCoupons();
+		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(myFacade.getAllMyCoupons());
 	}
 	
 	/**
@@ -71,18 +83,31 @@ public class CustomerRest {
 	 * @return the coupons filtered
 	 */
 	@RequestMapping(value="/customer/getMyCouponsSortedByType/{filter}/{reference}" , method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Coupon> getCouponsFiltered(@PathVariable ("filter") String filter,@PathVariable  ("reference") String reference , 
-			HttpServletRequest request) {
-		CustomerFacadeF myFacade = (CustomerFacadeF) request.getSession().getAttribute("facade");
-		//myFacade.setCustomerLogged(184);
-		return myFacade.getMyCouponsSortedByType(filter , reference);
+	public @ResponseBody ResponseEntity  getCouponsFiltered(@PathVariable ("filter") String filter,@PathVariable  ("reference") String reference , 
+			HttpServletRequest request , HttpServletResponse response) {
+		//CustomerFacadeF myFacade = (CustomerFacadeF) request.getSession().getAttribute("facade");
+		try {
+			ServiceFilter.serviceFilter(request, response);
+		} catch (CouponSystemException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
+		}
+		myFacade.setCustomerLogged(7);
+		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(myFacade.getMyCouponsSortedByType(filter , reference));
+
 	}
 	
+	
+	
 	@RequestMapping(value="/customer/getAllCoupons/" , method = RequestMethod.GET ,produces = MediaType.APPLICATION_JSON_VALUE)
-	public Iterable<Coupon> getAllCoupons(HttpServletRequest request){
-		CustomerFacadeF myFacade = (CustomerFacadeF) request.getSession().getAttribute("facade");
-		// myFacade.setCustomerLogged(184);
-		return myFacade.getAllCouponsToBuy();
+	public @ResponseBody ResponseEntity getAllCoupons(HttpServletRequest request , HttpServletResponse response){
+		try {
+			ServiceFilter.serviceFilter(request, response);
+		} catch (CouponSystemException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
+		}
+		//CustomerFacadeF myFacade = (CustomerFacadeF) request.getSession().getAttribute("facade");
+		myFacade.setCustomerLogged(7);
+		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(myFacade.getAllCouponsToBuy());
 	}
 
 }

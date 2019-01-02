@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel\">\n  <div class=\"panel-heading\"><h1>Welcome to Company home page</h1></div>\n</div>  \n\n<nav class=\"navbar navbar-light\" style=\"background-color: #e3f2fd;\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"\n                data-target=\".navbar-collapse\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n    </div>\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li class=\"active\"><a routerLink=\"#\">Home</a></li>\n            <li><a routerLink=\"/getallcoupons\">Get My coupons</a></li>\n            <li><a routerLink=\"/createcoupons\">Create coupon</a></li>\n            <li><a routerLink=\"/removeupdatecoupon\">Remove/Update coupon</a></li>\n        </ul>\n        \n    </div>\n</nav>\n<router-outlet></router-outlet>\n\n\n\n"
+module.exports = "<div class=\"panel\">\n  <div class=\"panel-heading\"><h1>Welcome to Company home page</h1></div>\n</div>  \n\n<button (click)=\"logOut()\" \n        type=\"button\" class=\"btn btn-default btn-sm ; \n                             btn btn-primary\" \n        style = \"position: absolute; right: 30px; top: 20px;\" >\n  <span class=\"glyphicon glyphicon-log-out\" aria-hidden=\"true\"></span> Log Out\n</button>\n\n<nav class=\"navbar navbar-light\" style=\"background-color: #e3f2fd;\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"\n                data-target=\".navbar-collapse\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n    </div>\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li class=\"active\"><a routerLink=\"#\">Home</a></li>\n            <li><a routerLink=\"/getallcoupons\">Get My coupons</a></li>\n            <li><a routerLink=\"/createcoupons\">Create coupon</a></li>\n            <li><a routerLink=\"/removeupdatecoupon\">Remove/Update coupon</a></li>\n        </ul>\n        \n    </div>\n</nav>\n<router-outlet></router-outlet>\n\n\n\n"
 
 /***/ }),
 
@@ -56,23 +56,34 @@ module.exports = "<div class=\"panel\">\n  <div class=\"panel-heading\"><h1>Welc
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_comapny_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/comapny.service */ "./src/app/services/comapny.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(_companyService) {
+        this._companyService = _companyService;
         this.title = 'company';
     }
+    AppComponent.prototype.logOut = function () {
+        console.log("LogOut");
+        this._companyService.logOutService();
+    };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [_services_comapny_service__WEBPACK_IMPORTED_MODULE_1__["ComapnyService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -606,35 +617,39 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var ComapnyService = /** @class */ (function () {
     function ComapnyService(_http) {
         this._http = _http;
+        this._urlHeroku = "https://couponsystemv1.herokuapp.com";
+        this._local = "http://localhost:8082";
+        this._locaLogIn = "http://localhost:8082/login.html";
+        this._herokuLogIn = "https://couponsystemv1.herokuapp.com/login.html";
     }
     ComapnyService.prototype.getAllCoupons = function () {
         var _this = this;
-        this._http.get("https://couponsystemv1.herokuapp.com/company/getAllCoupons").subscribe(function (resp) {
+        this._http.get(this._local + "/company/getAllCoupons").subscribe(function (resp) {
             _this.couponList = resp.json();
         });
     };
     ComapnyService.prototype.createCoupon = function (Coupon) {
         var _this = this;
         console.log(Coupon);
-        this._http.post("https://couponsystemv1.herokuapp.com/company/createCoupon", Coupon).subscribe(function (resp) {
+        this._http.post(this._local + "/company/createCoupon", Coupon).subscribe(function (resp) {
             _this.newCoupon = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon ' + _this.newCoupon.title + ' created');
         });
     };
     ComapnyService.prototype.getCouponById = function (id) {
         console.log(id);
-        return this._http.get("https://couponsystemv1.herokuapp.com/company/getCouponById/" + id);
+        return this._http.get(this._local + "/company/getCouponById/" + id);
     };
     ComapnyService.prototype.removeCoupon = function (id) {
         var _this = this;
-        this._http.delete("https://couponsystemv1.herokuapp.com/company/removeCoupon/" + id).subscribe(function (resp) {
+        this._http.delete(this._local + "/company/removeCoupon/" + id).subscribe(function (resp) {
             _this.newCoupon = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon with ID: ' + _this.newCoupon + ' removed');
         });
     };
     ComapnyService.prototype.updateCoupon = function (coupon) {
         var _this = this;
-        this._http.put("https://couponsystemv1.herokuapp.com/company/updateCoupon", coupon).subscribe(function (resp) {
+        this._http.put(this._local + "/company/updateCoupon", coupon).subscribe(function (resp) {
             _this.newCoupon = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon with ID : ' + _this.newCoupon.id + ' updated');
         });
@@ -642,10 +657,23 @@ var ComapnyService = /** @class */ (function () {
     ComapnyService.prototype.getCouponByType = function (filter) {
         var _this = this;
         console.log("into byType");
-        this._http.get("https://couponsystemv1.herokuapp.com/company/sortCouponBy/TYPE/" + filter).subscribe(function (resp) {
+        this._http.get(this._local + "/company/sortCouponBy/TYPE/" + filter).subscribe(function (resp) {
             _this.couponList = resp.json();
         }, function (error) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()(error._body);
+        });
+    };
+    ComapnyService.prototype.logOutService = function () {
+        console.log("from service");
+        this._http.get(this._local + "/logout").subscribe(function (resp) {
+            //  swal ("test" + resp.text());
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
+                title: resp.text(),
+                text: "Message!",
+                type: "success"
+            }).then(function () {
+                window.location.href = 'http://localhost:8082/';
+            });
         });
     };
     ComapnyService = __decorate([

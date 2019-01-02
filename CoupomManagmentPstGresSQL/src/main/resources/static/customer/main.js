@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel\">\n  <div class=\"panel-heading\"><h1>Welcome to Customer home page</h1></div>\n</div>  \n\n<nav class=\"navbar navbar-light\" style=\"background-color: #e3f2fd;\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"\n                data-target=\".navbar-collapse\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n    </div>\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li><a routerLink=\"\">Home</a></li>\n            <li><a routerLink=\"/buyCoupon\">Buy a coupon</a></li>\n            <li><a routerLink=\"/showCoupons\">Show my coupons</a></li>\n        </ul>\n        \n    </div>\n</nav>\n<router-outlet></router-outlet>\n\n\n\n"
+module.exports = "<div class=\"panel\">\n  <div class=\"panel-heading\"><h1>Welcome to Customer home page</h1></div>\n</div> \n\n<button (click)=\"logOut()\" \n        type=\"button\" class=\"btn btn-default btn-sm ; \n                             btn btn-primary\" \n        style = \"position: absolute; right: 30px; top: 20px;\" >\n  <span class=\"glyphicon glyphicon-log-out\" aria-hidden=\"true\"></span> Log Out\n</button>\n \n\n<nav class=\"navbar navbar-light\" style=\"background-color: #e3f2fd;\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"\n                data-target=\".navbar-collapse\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n    </div>\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li><a routerLink=\"\">Home</a></li>\n            <li><a routerLink=\"/buyCoupon\">Buy a coupon</a></li>\n            <li><a routerLink=\"/showCoupons\">Show my coupons</a></li>\n        </ul>\n        \n    </div>\n</nav>\n<router-outlet></router-outlet>\n\n\n\n"
 
 /***/ }),
 
@@ -56,23 +56,34 @@ module.exports = "<div class=\"panel\">\n  <div class=\"panel-heading\"><h1>Welc
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_customer_service_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/customer-service.service */ "./src/app/services/customer-service.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(_customerService) {
+        this._customerService = _customerService;
         this.title = 'company';
     }
+    AppComponent.prototype.logOut = function () {
+        console.log("LogOut");
+        this._customerService.logOutService();
+    };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [_services_customer_service_service__WEBPACK_IMPORTED_MODULE_1__["CustomerServiceService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -355,6 +366,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomerServiceService", function() { return CustomerServiceService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -366,23 +379,41 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var CustomerServiceService = /** @class */ (function () {
     function CustomerServiceService(_http) {
         this._http = _http;
+        this._urlHeroku = "https://couponsystemv1.herokuapp.com";
+        this._local = "http://localhost:8082";
+        this._locaLogIn = "http://localhost:8082/login.html";
+        this._herokuLogIn = "https://couponsystemv1.herokuapp.com/login.html";
     }
     CustomerServiceService.prototype.buyCoupon = function (id) {
-        return this._http.get("https://couponsystemv1.herokuapp.com/customer/purchaseCoupon/" + id);
+        return this._http.get(this._local + "/customer/purchaseCoupon/" + id);
     };
     CustomerServiceService.prototype.getAllCoupon = function () {
-        return this._http.get("https://couponsystemv1.herokuapp.com/customer/getAllCoupons/");
+        return this._http.get(this._local + "/customer/getAllCoupons/");
     };
     CustomerServiceService.prototype.getCouponsByType = function (reference) {
         console.log;
-        return this._http.get("https://couponsystemv1.herokuapp.com/customer/getMyCouponsSortedByType/TYPE/" + reference);
+        return this._http.get(this._local + "/customer/getMyCouponsSortedByType/TYPE/" + reference);
     };
     CustomerServiceService.prototype.getAllMyCoupons = function () {
         console.log("chech 2");
-        return this._http.get("https://couponsystemv1.herokuapp.com/customer/getAllMyCoupons");
+        return this._http.get(this._local + "/customer/getAllMyCoupons");
+    };
+    CustomerServiceService.prototype.logOutService = function () {
+        console.log("from service");
+        this._http.get(this._local + "/logout").subscribe(function (resp) {
+            //  swal ("test" + resp.text());
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
+                title: resp.text(),
+                text: "Message!",
+                type: "success"
+            }).then(function () {
+                window.location.href = 'http://localhost:8082/';
+            });
+        });
     };
     CustomerServiceService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

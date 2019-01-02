@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel\">\n\t<div class=\"panel-heading\"><h1>Welcome to admin home page</h1></div>\n</div>\t\n\n<nav class=\"navbar navbar-light\" style=\"background-color: #e3f2fd;\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"\n                data-target=\".navbar-collapse\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n    </div>\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li class=\"active\"><a routerLink=\"#\">Home</a></li>\n            <li><a routerLink=\"/getallcompanies\">Get All Companies</a></li>\n            <li><a routerLink=\"/createcompany\">Create Copmany</a></li>\n            <li><a routerLink=\"/removecopmany\">Remove/Update Company</a></li>\n            <li><a routerLink=\"/addcustomer\">Add Customer</a></li>\n            <li><a routerLink=\"/removeupadecustomer\">Remove/Update Customer</a></li>\n            <li><a routerLink=\"/getallcustomers\">Get All Customers</a></li>\n        </ul>\n        \n    </div>\n</nav>\n<router-outlet></router-outlet>\n"
+module.exports = "<div class=\"panel\">\n\t<div class=\"panel-heading\"><h1>Welcome to admin home page</h1></div>\n</div>\t\n \n<button (click)=\"logOut()\" \n        type=\"button\" class=\"btn btn-default btn-sm ; \n                             btn btn-primary\" \n        style = \"position: absolute; right: 30px; top: 20px;\" >\n  <span class=\"glyphicon glyphicon-log-out\" aria-hidden=\"true\"></span> Log Out\n</button>\n\n<nav class=\"navbar navbar-light\" style=\"background-color: #e3f2fd;\">\n    <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"\n                data-target=\".navbar-collapse\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </button>\n    </div>\n    <div class=\"navbar-collapse collapse\">\n        <ul class=\"nav navbar-nav\">\n            <li class=\"active\"><a routerLink=\"#\">Home</a></li>\n            <li><a routerLink=\"/getallcompanies\">Get All Companies</a></li>\n            <li><a routerLink=\"/createcompany\">Create Copmany</a></li>\n            <li><a routerLink=\"/removecopmany\">Remove/Update Company</a></li>\n            <li><a routerLink=\"/addcustomer\">Add Customer</a></li>\n            <li><a routerLink=\"/removeupadecustomer\">Remove/Update Customer</a></li>\n            <li><a routerLink=\"/getallcustomers\">Get All Customers</a></li>\n        </ul>\n        \n    </div>\n</nav>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -56,23 +56,34 @@ module.exports = "<div class=\"panel\">\n\t<div class=\"panel-heading\"><h1>Welc
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_admin_requests_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/admin-requests.service */ "./src/app/services/admin-requests.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(_adminService) {
+        this._adminService = _adminService;
         this.title = 'admin';
     }
+    AppComponent.prototype.logOut = function () {
+        console.log("LogOut");
+        this._adminService.logOutService();
+    };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [_services_admin_requests_service__WEBPACK_IMPORTED_MODULE_1__["AdminRequestsService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -403,7 +414,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-primary\" style=\"width: 50%\">\n\t<div class=\"panel-heading\">\n<h5 style=\"font-weight: bold;\">All Companies</h5>\n\t</div>\n<table class=\"table table-striped table-bordered\">\n\n\t\t<tr>\n\t\t\t<th>ID</th>\n\t\t\t<th>Company Name</th>\n\t\t\t<th>Password</th>\n\t\t\t<th>Email</th>\n\t\t</tr>\n\t\n\t<tr *ngFor = \"let company of companies\">\n\t<td>{{company.id}}</td>\t\n\t<td>{{company.compName}}</td>\n\t<td>{{company.password}}</td>\n\t<td>{{company.email}}</td>\n\t</tr>\n</table>\n<button (click)=\"loadAllComapnies()\" style=\"margin-top: 5%\">Update List</button>\n</div>\n"
+module.exports = "<div class=\"panel panel-primary\" style=\"width: 50% ; margin : 5%;\">\n\t<div class=\"panel-heading\">\n<h5 style=\"font-weight: bold; \">All Companies</h5>\n\t</div>\n<table class=\"table table-striped table-bordered\">\n\n\t\t<tr>\n\t\t\t<th>ID</th>\n\t\t\t<th>Company Name</th>\n\t\t\t<th>Password</th>\n\t\t\t<th>Email</th>\n\t\t</tr>\n\t\n\t<tr *ngFor = \"let company of companies\">\n\t<td>{{company.id}}</td>\t\n\t<td>{{company.compName}}</td>\n\t<td>{{company.password}}</td>\n\t<td>{{company.email}}</td>\n\t</tr>\n</table>\n<button (click)=\"loadAllComapnies()\" style=\"margin-top: 5%\">Update List</button>\n</div>\n"
 
 /***/ }),
 
@@ -475,7 +486,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-primary\" style=\"width: 50%\" >\n\t<div class=\"panel-heading\">\n\t<h5 style=\"font-weight: bold;\">Customer List</h5>\n\t</div>\n\t<table class=\"table table table-striped table-bordered\">\n\t\t<tr>\n\t\t\t<th>ID</th>\n\t\t\t<th>Name</th>\n\t\t\t<th>Password</th>\n\t\t</tr>\n\t\t<tr *ngFor=\"let customer of customers\">\n\t\t\t<td>{{customer.id}}</td>\n\t\t\t<td>{{customer.custName}}</td>\n\t\t\t<td>{{customer.password}}</td>\n\t\t</tr>\n\n\t</table>\n\t<button (click)=\"getAllCustomers()\" style=\"margin-top: 5%\">Update List</button>\n</div>\n"
+module.exports = "<div class=\"panel panel-primary\" style=\"width: 50% ; margin : 5%;\" >\n\t<div class=\"panel-heading\">\n\t<h5 style=\"font-weight: bold;\">Customer List</h5>\n\t</div>\n\t<table class=\"table table table-striped table-bordered\">\n\t\t<tr>\n\t\t\t<th>ID</th>\n\t\t\t<th>Name</th>\n\t\t\t<th>Password</th>\n\t\t</tr>\n\t\t<tr *ngFor=\"let customer of customers\">\n\t\t\t<td>{{customer.id}}</td>\n\t\t\t<td>{{customer.custName}}</td>\n\t\t\t<td>{{customer.password}}</td>\n\t\t</tr>\n\n\t</table>\n\t<button (click)=\"getAllCustomers()\" style=\"margin-top: 5%\">Update List</button>\n</div>\n"
 
 /***/ }),
 
@@ -732,21 +743,25 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var AdminRequestsService = /** @class */ (function () {
     function AdminRequestsService(http) {
         this.http = http;
+        this._urlHeroku = "https://couponsystemv1.herokuapp.com";
+        this._local = "http://localhost:8082";
+        this._locaLogIn = "http://localhost:8082/login.html";
+        this._herokuLogIn = "https://couponsystemv1.herokuapp.com/login.html";
     }
     AdminRequestsService.prototype.getAllComapnies = function () {
         var _this = this;
         //this.http.get("http://localhost:8082/admin/getAllCompanies").subscribe(
-        this.http.get("https://couponsystemv1.herokuapp.com/admin/getAllCompanies").subscribe(function (resp) {
+        this.http.get(this._urlHeroku + "/admin/getAllCompanies").subscribe(function (resp) {
             _this.companies = resp.json();
         });
     };
     AdminRequestsService.prototype.createNewCopmany = function (company) {
         // return this.http.post("http://localhost:8082/admin/createCompany" , company);
-        return this.http.post("https://couponsystemv1.herokuapp.com/admin/createCompany", company);
+        return this.http.post(this._urlHeroku + "/admin/createCompany", company);
     };
     AdminRequestsService.prototype.searchCompanyById = function (id) {
         //return  this.http.get("http://localhost:8082/admin/getCompany/" + id)
-        return this.http.get("https://couponsystemv1.herokuapp.com/admin/getCompany/" + id);
+        return this.http.get(this._urlHeroku + "/admin/getCompany/" + id);
     };
     // need to create for in Server Side 
     AdminRequestsService.prototype.searchCompanyByName = function (name) {
@@ -758,7 +773,7 @@ var AdminRequestsService = /** @class */ (function () {
             body: company,
         });
         // this.http.delete("http://localhost:8082/admin/removeCompany" , options).subscribe(
-        this.http.delete("https://couponsystemv1.herokuapp.com/admin/removeCompany", options).subscribe(function (resp) {
+        this.http.delete(this._urlHeroku + "/admin/removeCompany", options).subscribe(function (resp) {
             if (resp.status == 200) {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Company was removed');
             }
@@ -767,7 +782,7 @@ var AdminRequestsService = /** @class */ (function () {
     AdminRequestsService.prototype.updateCompany = function (company) {
         var _this = this;
         // this.http.put("http://localhost:8082/admin/companyDetailsUpdate" , company).subscribe(
-        this.http.put("https://couponsystemv1.herokuapp.com/admin/companyDetailsUpdate", company).subscribe(function (resp) {
+        this.http.put(this._urlHeroku + "/admin/companyDetailsUpdate", company).subscribe(function (resp) {
             _this.company = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Company ' + _this.company.compName + ' was Updated');
         });
@@ -776,13 +791,13 @@ var AdminRequestsService = /** @class */ (function () {
     AdminRequestsService.prototype.getAllCustomers = function () {
         var _this = this;
         // this.http.get("http://localhost:8082/admin/getCustomerList").subscribe(
-        this.http.get("https://couponsystemv1.herokuapp.com/admin/getCustomerList").subscribe(function (resp) {
+        this.http.get(this._urlHeroku + "/admin/getCustomerList").subscribe(function (resp) {
             _this.customers = resp.json();
         });
     };
     AdminRequestsService.prototype.createCustomer = function (customer) {
         // return this.http.post("http://localhost:8082/admin/addCustomer" , customer); 
-        return this.http.post("https://couponsystemv1.herokuapp.com/admin/addCustomer", customer);
+        return this.http.post(this._urlHeroku + "/admin/addCustomer", customer);
         // this.http.post("http://localhost:8082/admin/addCustomer" , customer).subscribe(
         //   (resp)=>{
         //     this.customer = resp.json(); 
@@ -791,12 +806,12 @@ var AdminRequestsService = /** @class */ (function () {
     };
     AdminRequestsService.prototype.searchCustomerById = function (id) {
         //return this.http.get("http://localhost:8082/admin/getCustomer/" + id);
-        return this.http.get("https://couponsystemv1.herokuapp.com/admin/getCustomer/" + id);
+        return this.http.get(this._urlHeroku + "/admin/getCustomer/" + id);
     };
     AdminRequestsService.prototype.updateCustomer = function (customer) {
         var _this = this;
         // this.http.put("http://localhost:8082/admin/updateCustomerDetails", customer).subscribe(
-        this.http.put("https://couponsystemv1.herokuapp.com/admin/updateCustomerDetails", customer).subscribe(function (resp) {
+        this.http.put(this._urlHeroku + "/admin/updateCustomerDetails", customer).subscribe(function (resp) {
             _this.customer = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Customer ' + _this.customer.custName + ' updated');
         });
@@ -807,9 +822,22 @@ var AdminRequestsService = /** @class */ (function () {
             body: customer
         });
         //this.http.delete("http://localhost:8082/admin/removeCustomer" , options).subscribe(
-        this.http.delete("https://couponsystemv1.herokuapp.com/admin/removeCustomer", options).subscribe(function (resp) {
+        this.http.delete(this._urlHeroku + "/admin/removeCustomer", options).subscribe(function (resp) {
             _this.customer = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Customer ' + _this.customer.custName + ' removed');
+        });
+    };
+    AdminRequestsService.prototype.logOutService = function () {
+        console.log("from service");
+        this.http.get(this._urlHeroku + "/logout").subscribe(function (resp) {
+            //  swal ("test" + resp.text());
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
+                title: resp.text(),
+                text: "Message!",
+                type: "success"
+            }).then(function () {
+                window.location.href = 'http://localhost:8082/';
+            });
         });
     };
     AdminRequestsService = __decorate([
