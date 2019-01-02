@@ -624,32 +624,32 @@ var ComapnyService = /** @class */ (function () {
     }
     ComapnyService.prototype.getAllCoupons = function () {
         var _this = this;
-        this._http.get(this._local + "/company/getAllCoupons").subscribe(function (resp) {
+        this._http.get(this._urlHeroku + "/company/getAllCoupons").subscribe(function (resp) {
             _this.couponList = resp.json();
         });
     };
     ComapnyService.prototype.createCoupon = function (Coupon) {
         var _this = this;
         console.log(Coupon);
-        this._http.post(this._local + "/company/createCoupon", Coupon).subscribe(function (resp) {
+        this._http.post(this._urlHeroku + "/company/createCoupon", Coupon).subscribe(function (resp) {
             _this.newCoupon = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon ' + _this.newCoupon.title + ' created');
         });
     };
     ComapnyService.prototype.getCouponById = function (id) {
         console.log(id);
-        return this._http.get(this._local + "/company/getCouponById/" + id);
+        return this._http.get(this._urlHeroku + "/company/getCouponById/" + id);
     };
     ComapnyService.prototype.removeCoupon = function (id) {
         var _this = this;
-        this._http.delete(this._local + "/company/removeCoupon/" + id).subscribe(function (resp) {
+        this._http.delete(this._urlHeroku + "/company/removeCoupon/" + id).subscribe(function (resp) {
             _this.newCoupon = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon with ID: ' + _this.newCoupon + ' removed');
         });
     };
     ComapnyService.prototype.updateCoupon = function (coupon) {
         var _this = this;
-        this._http.put(this._local + "/company/updateCoupon", coupon).subscribe(function (resp) {
+        this._http.put(this._urlHeroku + "/company/updateCoupon", coupon).subscribe(function (resp) {
             _this.newCoupon = resp.json();
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Coupon with ID : ' + _this.newCoupon.id + ' updated');
         });
@@ -657,7 +657,7 @@ var ComapnyService = /** @class */ (function () {
     ComapnyService.prototype.getCouponByType = function (filter) {
         var _this = this;
         console.log("into byType");
-        this._http.get(this._local + "/company/sortCouponBy/TYPE/" + filter).subscribe(function (resp) {
+        this._http.get(this._urlHeroku + "/company/sortCouponBy/TYPE/" + filter).subscribe(function (resp) {
             _this.couponList = resp.json();
         }, function (error) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()(error._body);
@@ -665,7 +665,7 @@ var ComapnyService = /** @class */ (function () {
     };
     ComapnyService.prototype.logOutService = function () {
         console.log("from service");
-        this._http.get(this._local + "/logout").subscribe(function (resp) {
+        this._http.get(this._urlHeroku + "/logout").subscribe(function (resp) {
             //  swal ("test" + resp.text());
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
                 title: resp.text(),

@@ -389,29 +389,29 @@ var CustomerServiceService = /** @class */ (function () {
         this._herokuLogIn = "https://couponsystemv1.herokuapp.com/login.html";
     }
     CustomerServiceService.prototype.buyCoupon = function (id) {
-        return this._http.get(this._local + "/customer/purchaseCoupon/" + id);
+        return this._http.get(this._urlHeroku + "/customer/purchaseCoupon/" + id);
     };
     CustomerServiceService.prototype.getAllCoupon = function () {
-        return this._http.get(this._local + "/customer/getAllCoupons/");
+        return this._http.get(this._urlHeroku + "/customer/getAllCoupons/");
     };
     CustomerServiceService.prototype.getCouponsByType = function (reference) {
         console.log;
-        return this._http.get(this._local + "/customer/getMyCouponsSortedByType/TYPE/" + reference);
+        return this._http.get(this._urlHeroku + "/customer/getMyCouponsSortedByType/TYPE/" + reference);
     };
     CustomerServiceService.prototype.getAllMyCoupons = function () {
         console.log("chech 2");
-        return this._http.get(this._local + "/customer/getAllMyCoupons");
+        return this._http.get(this._urlHeroku + "/customer/getAllMyCoupons");
     };
     CustomerServiceService.prototype.logOutService = function () {
         console.log("from service");
-        this._http.get(this._local + "/logout").subscribe(function (resp) {
+        this._http.get(this._urlHeroku + "/logout").subscribe(function (resp) {
             //  swal ("test" + resp.text());
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
                 title: resp.text(),
                 text: "Message!",
                 type: "success"
             }).then(function () {
-                window.location.href = 'http://localhost:8082/';
+                window.location.href = 'https://couponsystemv1.herokuapp.com/';
             });
         });
     };
