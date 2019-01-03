@@ -47,18 +47,26 @@ public class Customer {
 	@JsonIgnore 
 	private Collection<Coupon> coupons;
 
+	/**
+	 * Gets the coupons.
+	 *
+	 * @return the coupons
+	 */
 	public Collection<Coupon> getCoupons() {
 		return coupons;
 	}
+	
+	/**
+	 * Sets the coupons.
+	 *
+	 * @param coupons the new coupons
+	 */
 	public void setCoupons(Collection<Coupon> coupons) {
 		this.coupons = coupons;
 	}
+	
 	/**
 	 * Instantiates a new customer.
-	 *
-	 * @param id       the id
-	 * @param custName the cust name
-	 * @param password the password
 	 */
 	
 	public Customer() {
@@ -66,6 +74,14 @@ public class Customer {
 	}
 	
 
+	/**
+	 * Instantiates a new customer.
+	 *
+	 * @param id the id
+	 * @param custName the cust name
+	 * @param password the password
+	 * @param coupons the coupons
+	 */
 	public Customer(int id, String custName, String password, Collection<Coupon> coupons) {
 		super();
 		this.id = id;
@@ -74,6 +90,11 @@ public class Customer {
 		this.coupons = coupons;
 	}
 	
+	/**
+	 * Buy coupon.
+	 *
+	 * @param coupon the coupon
+	 */
 	public void buyCoupon(Coupon coupon) {
 		Collection<Coupon> coupons = null ; 
 		coupons = this.getCoupons();
@@ -84,6 +105,12 @@ public class Customer {
 		
 	} 
 	
+	/**
+	 * If coupons purchased.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 */
 	public boolean ifCouponsPurchased(int id) {
 		boolean result = false ;
 		Collection<Coupon> coupons = this.getCoupons();
@@ -148,6 +175,10 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", custName=" + custName + ", password=" + password + ", coupons=" + coupons
@@ -155,6 +186,9 @@ public class Customer {
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -162,6 +196,10 @@ public class Customer {
 		result = prime * result + ((custName == null) ? 0 : custName.hashCode());
 		return result;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

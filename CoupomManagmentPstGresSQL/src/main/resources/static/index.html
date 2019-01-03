@@ -6,35 +6,24 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- 
-<script>
-$(document).ready(function(){
-    $("button").click(function(){
-    	console.log("hello");
-    	var type = $("#option").val();
-    	var user = $("#name").val();
-    	var pass = $("#pass").val();
-    	console.log(type , user , pass);
-    	$.post("http://localhost:8082/LogIn", { pwd: pass, userType: type , name: user } , 
-    			function(response){
-    		console.log(response);
-    		$("html").html(response);
-    	}); 
-    })
-});
-
-</script>
- -->
+<style>
+body {
+ background-image: url("https://www.monro.com/wp-content/uploads/2018/07/offer-background-3.jpg");
+ background-color: #cccccc;
+}
+</style>
  
 <title>Log In page</title>
 </head>
 <body>
-<h1>Welcome to Coupon System LogIn Page</h1>
-<hr>
-<br>
-<div class="panel panel-primary" style="width:20%; margin:2%">
+<div class="panel panel-primary">
+      <div class="panel-heading"><h1>Welcome to Coupon Online System</h1></div>
+      <div class="panel-body">Enjoy our offers  <img src="https://previews.123rf.com/images/ayo88/ayo881412/ayo88141200003/34197550-hand-holding-discount-coupons-isolated-over-white-background-focus-on-coupons.jpg" alt="Smiley face" height="100" width="100"> </div>
+</div>
+
+<div class="panel panel-primary" style="width:18%;  position: absolute;left: 700px; top: 400px;">
 	<div class="panel-heading"><h5>Please enter details</h5></div>
-	<form style="margin:2%"  action="https://couponsystemv1.herokuapp.com/login" method="POST">
+	<form style="margin:2%; text-align: center"  action="http://localhost:8082/login" method="POST">
 	<select id="option" name="usertype">
 	<option>admin</option>
 	<option>company</option>
@@ -42,10 +31,10 @@ $(document).ready(function(){
 	</select>
 	<br>
 	<span> User name: </span>
-	<input name="name"   type="text">
+	<input  style="margin:2%"   name="name"  type="text">
 	<br>
-	<span>PassWord:</span>
-	<input name="pwd" type="password" >
+	<span>PassWord:&nbsp;</span>
+	<input style="margin:2%" name="pwd" type="password" >
 	<br>
 	<button>Submit</button>
 	</form>

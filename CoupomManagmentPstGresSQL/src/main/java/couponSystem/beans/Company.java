@@ -45,6 +45,10 @@ public class Company {
 	@Column
 	private String email;
 	
+	/** Many To Many relationship annotation. 
+	 * Each company could has collection of coupons, 
+	 * and each coupon could has only one company */
+	
 	@OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name="COMPANY_ID")
 	@JsonIgnore 
@@ -90,19 +94,23 @@ public class Company {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+ 
+	/**Getter for coupons */
 	public Collection<Coupon> getCoupons() {
 		return coupons;
 	}
-
+	/**Setter  for coupons */
 	public void setCoupons(Collection<Coupon> coupons) {
 		this.coupons = coupons;
 	}
-	
+	/** Method adds new coupons to collection*/
 	public void addCoupon(Coupon coupon) {
 		this.coupons.add(coupon);
 		
 	}
+	
+	/** Checks if some @param coupons Id already 
+	 * exists in collection , returns true or false */
 	 public boolean   checkCoupon(int id) {
 		 boolean result = false; 
 		 for (Coupon checkedCoupon : this.coupons) {
@@ -114,10 +122,12 @@ public class Company {
 		return result;
 	 }
 	 
+	 /** Method clears all coupons from the collection*/
 	 public void clearAllCoupon() {
 		 this.coupons.removeAll(this.coupons);
 	 }
 	 
+	 /** Method removes single coupon with @param Id from the collection*/
 	 public void removeCoupon(int id) {
 		 for (Coupon checkedCoupon : this.coupons) {
 			 if (checkedCoupon.getId() == id) {

@@ -69,27 +69,103 @@ public class Coupon  {
 	@Column
 	private String image;
 
-	/**
-	 * Instantiates a new coupon.
-	 */
+	/** Spring hibernate annotation for Table relationship.
+	 * Many toMany - each coupon could has many owners(customers) and  
+	 * each Customer could has many coupons*/
+	
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.DETACH , CascadeType.REFRESH})
 //	@JoinTable(name = "customer_coupon",
 //				joinColumns = @JoinColumn(name = "customer_id"),
 //				inverseJoinColumns = @JoinColumn(name = "coupon_id"))
+	/**
+	 * Instantiates a new coupon.
+	 */
 	private Collection<Customer> customers;
 	
 
 
+	/**
+	 * Gets the customers.
+	 *
+	 * @return the customers
+	 */
 	public Collection<Customer> getCustomers() {
 		return customers;
 	}
 
+	/**
+	 * Sets the customers.
+	 *
+	 * @param customers the new customers
+	 */
 	public void setCustomers(Collection<Customer> customers) {
 		this.customers = customers;
 	}
 
+	/**
+	 * Instantiates a new coupon.
+	 */
 	public Coupon() {
 	}
+
+	/**
+	 * Instantiates a new coupon.
+	 *
+	 * @return the id
+	 */
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	
+	/**
+	 * Buy coupon.
+	 *
+	 * @param customer the customer
+	 */
+	public void buyCoupon(Customer customer) {
+		Collection<Customer> customers = null;
+		customers =this.getCustomers();
+		customers.add(customer);
+		this.setCustomers(customers);
+		// System.out.println("Who buy my coupon " + this.getCustomers());
+	}
+	 
+	/**
+	 * If sold out.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean ifSoldOut() {
+		boolean result = false ;
+		System.out.println("Coupon amount is " + this.getAmount());
+		if (this.getAmount()<1) {
+			result = true ; 
+		}
+		return result ; 
+	}
+	
+	/**
+	 * If expired.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean ifExpired() {
+		long time = System.currentTimeMillis();
+		Date date = new Date(time);
+		boolean result = false;
+		if (this.getEndDate().before(date)) {
+			result = true; 
+		}
+		return result; 
+	}
+
+	
 
 	/**
 	 * Instantiates a new coupon.
@@ -103,46 +179,8 @@ public class Coupon  {
 	 * @param message the message
 	 * @param price the price
 	 * @param image the image
+	 * @param customers the customers
 	 */
-	
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	
-	public void buyCoupon(Customer customer) {
-		Collection<Customer> customers = null;
-		customers =this.getCustomers();
-		customers.add(customer);
-		this.setCustomers(customers);
-		// System.out.println("Who buy my coupon " + this.getCustomers());
-	}
-	
-	public boolean ifSoldOut() {
-		boolean result = false ;
-		System.out.println("Coupon amount is " + this.getAmount());
-		if (this.getAmount()<1) {
-			result = true ; 
-		}
-		return result ; 
-	}
-	
-	public boolean ifExpired() {
-		long time = System.currentTimeMillis();
-		Date date = new Date(time);
-		boolean result = false;
-		if (this.getEndDate().before(date)) {
-			result = true; 
-		}
-		return result; 
-	}
-
-	
-
 	public Coupon(int id, String title, Date startDate, Date endDate, int amount, CouponType type, String message,
 			Double price, String image, Collection<Customer> customers) {
 		super();
@@ -311,6 +349,9 @@ public class Coupon  {
 		this.type = type;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Coupon [id=" + id + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate

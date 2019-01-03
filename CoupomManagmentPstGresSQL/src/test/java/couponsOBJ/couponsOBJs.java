@@ -4,6 +4,9 @@ import java.sql.Date;
 import couponSystem.beans.Coupon;
 import couponSystem.beans.CouponType;
 
+/**
+ * The Class couponsOBJs.
+ */
 public class couponsOBJs {
 	
 //	public static Coupon coupon1 = new Coupon(1, "BestSport", Date.valueOf("2018-01-01"), Date.valueOf("2019-01-29") , 10 , CouponType.valueOf("SPORTS"), "Best deal" , 34.87 , "www.image.jpge" , null);

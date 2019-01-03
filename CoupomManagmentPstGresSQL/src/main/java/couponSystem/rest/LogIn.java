@@ -12,20 +12,29 @@ import couponSystem.logIn.LogInService;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LogIn.
+ */
 @Controller
 public class LogIn {
 
+	/** The login service. */
 	@Autowired 
 	LogInService loginService; 
 	
+	/**
+	 * Do post redirect.
+	 *
+	 * @param name the name
+	 * @param pwd the pwd
+	 * @param usertype the usertype
+	 * @param request the request
+	 * @return the string
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public  String doPostRedirect(
-			// declare parameters sent by the user!
-			/*
-		<p> NAME : <input name="name" type="text"></p>
-		<p> PASSWORD : <input name="pwd" type="password"></p>
-		use must call the parameters like the text box name attribute
-			 */
+		
 				@RequestParam String name, @RequestParam String pwd, @RequestParam String usertype,
 				HttpServletRequest request
 			)

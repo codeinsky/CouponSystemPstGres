@@ -19,6 +19,14 @@ import couponSystem.facade.ClientCouponFacade;
 @RestController 
 public class LogOut {
 
+		/**
+		 * Logging out.
+		 *
+		 * @param request the request
+		 * @param response the response
+		 * @return the response entity
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		@RequestMapping(value = "/logout", method = RequestMethod.GET)
 		public @ResponseBody  ResponseEntity loggingOut(HttpServletRequest request , HttpServletResponse response) throws IOException {
 		//	HttpSession mySession = request.getSession();

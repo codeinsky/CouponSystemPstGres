@@ -10,25 +10,37 @@ import couponSystem.facade.CustomerFacadeF;
 import couponSystem.repos.CompanyRepo;
 import couponSystem.repos.CustomerRepo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LogInService.
+ */
 @Service
 public class LogInService implements LogIn{
 	
+	/** The company repo. */
 	@Autowired
 	CompanyRepo companyRepo;
 	
+	/** The customer repo. */
 	@Autowired
 	CustomerRepo customerRepo; 
 	
+	/** The admin facade. */
 	@Autowired 
 	AdminFacadeF adminFacade;
 	
+	/** The company facade. */
 	@Autowired 
 	CompanyFacadeF companyFacade; 
 	
+	/** The customer facade. */
 	@Autowired
 	CustomerFacadeF customerFacade;
 	
 	
+	/* (non-Javadoc)
+	 * @see couponSystem.logIn.LogIn#logIn(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public ClientCouponFacade logIn(String userType, String userName, String password) {
 		ClientCouponFacade facade = null ; 
