@@ -408,7 +408,7 @@ var CustomerServiceService = /** @class */ (function () {
             //  swal ("test" + resp.text());
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
                 title: resp.text(),
-                text: "Message!",
+                text: "Always Welcome",
                 type: "success"
             }).then(function () {
                 window.location.href = 'https://couponsystemv1.herokuapp.com/';

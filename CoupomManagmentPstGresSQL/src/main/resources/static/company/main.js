@@ -672,7 +672,7 @@ var ComapnyService = /** @class */ (function () {
                 text: "Message!",
                 type: "success"
             }).then(function () {
-                window.location.href = 'http://localhost:8082/';
+                window.location.href = 'https://couponsystemv1.herokuapp.com/';
             });
         });
     };
